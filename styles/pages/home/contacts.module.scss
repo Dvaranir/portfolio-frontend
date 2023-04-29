@@ -1,3 +1,5 @@
+@import '../../core/index.scss';
+
 .contacts{
     &__section-container{
         margin-bottom: 131px;
@@ -47,7 +49,7 @@
         }
 
         &-link{
-            
+
             &:hover .contacts__contacts-contact-text{
                 color: $white;
             }
@@ -58,8 +60,12 @@
             height: auto;
         }
 
-        &-contact-text{
-            transition: color .2s ease;
+        &-contact{
+            display: flex;
+            align-items: center;
+            &-text{
+                transition: color .2s ease;
+            }
         }
     }
     

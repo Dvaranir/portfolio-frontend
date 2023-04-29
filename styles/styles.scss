@@ -39,19 +39,7 @@ h2 {
     color: $primary;
 }
 
-.button{
-    width: fit-content;
-    padding: 0.5em 0.7em 0.4em 0.7em;
-    text-align: center;
-    background-color: transparent;
-    border: 1px $primary solid;
-    color: inherit;
-    transition: background-color .2s ease;
 
-    &:hover{
-        background-color: rgba($primary, 0.3);
-    }
-}
 
 .line{
     height: 1px;
