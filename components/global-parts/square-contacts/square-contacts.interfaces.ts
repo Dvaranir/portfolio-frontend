@@ -1,4 +1,4 @@
-export interface SquareContactProps {
+export interface ISquareContactProps {
     href: string,
     imageSrc: string,
     imageAlt: string,

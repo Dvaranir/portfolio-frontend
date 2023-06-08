@@ -2,9 +2,10 @@
     &__container{
         display: flex;
         flex-direction: column;
-        gap: 3rem;
-        padding-bottom: 2rem;
+        gap: 1rem;
+        padding-bottom: 1rem;
         grid-column: 3;
+        align-self: flex-end;
     }
     &__logo{
 

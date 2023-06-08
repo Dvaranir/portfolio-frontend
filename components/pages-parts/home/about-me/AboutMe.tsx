@@ -1,6 +1,11 @@
 import React from 'react'
+import Lottie from 'react-lottie'
 
 import DefaultButton from '@/components/global-parts/DefaultButton'
+
+import AboutMeAnimation from '@/public/assets/animations/programmer_zen.json'
+
+import { GenLottieOptions } from '@/scripts/functions'
 
 import styles from  '@/styles/pages/home/about-me.module.scss'
 
@@ -18,7 +23,9 @@ function AboutMe() {
             <p className={styles["about-me__text"]}>Transforming my creativity and knowledge into a websites has been my passion for over a year. I have been helping various clients to establish their presence online. I always strive to learn about the newest technologies and frameworks.</p>
             <DefaultButton additionalClass={styles["about-me__button"]} content='Read more -&gt;'/>
             </div>
-            <div id="about-me__animation-container" className={styles["about-me__animation-container"]}></div>
+            <div id="about-me__animation-container" className={styles["about-me__animation-container"]}>
+              <Lottie options={GenLottieOptions(AboutMeAnimation)} />
+            </div>
         </div>
     </section>
   )

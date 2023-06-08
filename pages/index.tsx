@@ -6,13 +6,15 @@ import Projects from '@/components/pages-parts/home/projects/Projects'
 import Skills from '@/components/pages-parts/home/skills/Skills'
 import Contacts from '@/components/pages-parts/home/contacts/Contacts'
 
-import { ProjectProps } from '@/components/pages-parts/home/projects/project.interfaces'
-import { SkillProps } from '@/components/pages-parts/home/skills/skill.interfaces'
-import { SquareContactProps } from '@/components/global-parts/square-contacts/square-contacts.interfaces'
+import { IProjectProps } from '@/components/pages-parts/home/projects/project.interfaces'
+import { ISkillProps } from '@/components/pages-parts/home/skills/skill.interfaces'
+import { ISquareContactProps } from '@/components/global-parts/square-contacts/square-contacts.interfaces'
+
+import axios from "axios";
 
 export default function Home() {
 
-  const dummyProjects: ProjectProps[] = [
+  const dummyProjects: IProjectProps[] = [
     {
         liveLink: '#',
         gitLink: '#',
@@ -40,7 +42,7 @@ export default function Home() {
     
   ]
 
-  const dummySkills: SkillProps[] = [
+  const dummySkills: ISkillProps[] = [
     {
       heading:'Languages',
       technologies:'Python C# TypeScript JavaScript Bash',
@@ -63,7 +65,7 @@ export default function Home() {
     },
   ]
 
-  const dummyContacts: SquareContactProps[] = [
+  const dummyContacts: ISquareContactProps[] = [
     {
       href: "tel:87770164685",
       imageSrc: "/assets/images/phone-icon.png",
@@ -89,6 +91,29 @@ export default function Home() {
       text: "Linkedin",
     },
   ]
+  async function test() {
+    // console.log(process.env.NEXT_PUBLIC_API_URL);
+    
+    // const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/authenticate`, {email: 'test123@gmail.com', password: '1234'})
+    // console.log(response.data.token);
+
+    // const credentialDetails = {
+    //   email: 'test123@gmail.com',
+    //   password: '1234',
+    // };
+
+    // const resp = await fetch(process.env.NEXT_PUBLIC_API_URL + "/auth/authenticate", {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(credentialDetails),
+    // });
+    // const user = await resp.json();
+    // console.log(user.token);
+    
+  } test()
 
   return (
     <>

@@ -1,4 +1,4 @@
-export interface SkillProps {
+export interface ISkillProps {
     heading: string,
     technologies: string,
 }

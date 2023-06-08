@@ -5,25 +5,41 @@ import Link from 'next/link'
 
 import { EmptyIfUndefined } from '@/scripts/functions'
 
-type Props = {
-  content: string,
-  href?: string,
-  link?: boolean,
-  onClick?: () => void,
-  additionalClass?: string,
-}
+import { IDefaultButtonProps } from './default-button.interfaces'
 
-export default function DefaultButton({ content, href, onClick, additionalClass, link=false }: Props) {
+export default function DefaultButton({ content, href, onClick, additionalClass, link=false, button=false, type="submit", newWindow=true }: IDefaultButtonProps) {
   additionalClass = EmptyIfUndefined(additionalClass)
 
-  return (
-    link
-    ? <a className={`${styles["button"]} ${additionalClass}`}
-         href={href}
-         onClick={onClick}>{content}</a>
-    : <Link href={href ? href : '#'}
-            className={`${styles["button"]}  ${additionalClass}`}
-            onClick={onClick}>{content}</Link>
-  )
+  type additionalParameters = {
+      target?: string,
+      rel?: string,
+  }
+
+  let additionalParameters: additionalParameters = {}
+
+  if(newWindow) {
+    additionalParameters.target = '_blank'
+    additionalParameters.rel = 'noopener noreferrer'
+  };
+
+  if(link && !button){
+    return (<Link href={href ? href : '#'}
+                  className={`${styles["button"]}  ${additionalClass}`}
+                  onClick={onClick}
+                  {...additionalParameters}>{content}</Link>)
+  }
+  else if(!link && !button){
+    return (<a className={`${styles["button"]} ${additionalClass}`}
+               href={href}
+               onClick={onClick}
+               {...additionalParameters}>{content}</a>)
+  }
+  else {
+    return (<button type={type}
+                    className={`${styles["button"]} ${additionalClass}`}
+                    onClick={onClick}
+                    >{content}</button>)
+  }
+ 
 }
 

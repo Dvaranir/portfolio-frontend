@@ -2,10 +2,10 @@ import React from 'react'
 import Image from 'next/image'
 import { NoComponentIfUndefined } from '@/scripts/functions'
 import DefaultButton from '@/components/global-parts/DefaultButton'
-import { ProjectProps } from './project.interfaces'
+import { IProjectProps } from './project.interfaces'
 import styles from  '@/styles/pages/home/projects.module.scss'
 
-export default function Project(props: {project: ProjectProps}) {
+export default function Project(props: {project: IProjectProps}) {
 
     const {projectName, technologies, projectAbout, imageSrc, liveLink, gitLink} = props.project;
   

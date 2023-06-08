@@ -1,5 +1,4 @@
-
-export interface ProjectProps {
+export interface IProjectProps {
     liveLink?: string,
     gitLink?: string,
     imageSrc: string,

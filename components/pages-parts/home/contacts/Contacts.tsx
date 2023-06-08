@@ -1,12 +1,12 @@
 import React from 'react'
 
 import SquareContacts from '../../../global-parts/square-contacts/SquareContacts'
-import { SquareContactProps } from '../../../global-parts/square-contacts/square-contacts.interfaces'
+import { ISquareContactProps } from '../../../global-parts/square-contacts/square-contacts.interfaces'
 
 import styles from  '@/styles/pages/home/contacts.module.scss'
 
 
-export default function Contacts(props: {squareContactsList: SquareContactProps[]}) {
+export default function Contacts(props: {squareContactsList: ISquareContactProps[]}) {
     const {squareContactsList} = props
   return (
     <section className={styles["contacts__section-container"]}>

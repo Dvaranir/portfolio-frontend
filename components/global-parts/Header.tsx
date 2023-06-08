@@ -1,6 +1,9 @@
 import React from 'react'
 
 import Image from 'next/image'
+import Link from 'next/link'
+
+import LanguageSelector from './LanguageSelector'
 
 function Header() {
   return (
@@ -12,26 +15,23 @@ function Header() {
         <nav className="header__navigation-container">
             <ul className="header__navigation-list">
             <li className="header__navigation-item">
-                <a href="" className="header__navigation-anchor"><span className="header__navigation-cage primary-color">#</span>home
-                </a>
+                <Link href="/" className="header__navigation-anchor"><span className="header__navigation-cage primary-color">#</span>home
+                </Link>
             </li>
             <li className="header__navigation-item">
-                <a href="" className="header__navigation-anchor"><span className="header__navigation-cage primary-color">#</span>projects
-                </a>
+                <Link href="/projects" className="header__navigation-anchor"><span className="header__navigation-cage primary-color">#</span>projects
+                </Link>
             </li>
             <li className="header__navigation-item">
-                <a href="" className="header__navigation-anchor"><span className="header__navigation-cage primary-color">#</span>about-me
-                </a>
+                <Link href="/about" className="header__navigation-anchor"><span className="header__navigation-cage primary-color">#</span>about-me
+                </Link>
             </li>
             <li className="header__navigation-item">
-                <a href="" className="header__navigation-anchor"><span className="header__navigation-cage primary-color">#</span>contacts
-                </a>
+                <Link href="" className="header__navigation-anchor"><span className="header__navigation-cage primary-color">#</span>contacts
+                </Link>
             </li>
             <li className="header__navigation-item">
-                <select className="header__navigation_language-select" name="languages" id="languages">
-                <option className="header__navigation_language-option" value="EN">EN</option>
-                <option className="header__navigation_language-option" value="RU">RU</option>
-                </select>
+                <LanguageSelector />
             </li>
             </ul>
         </nav>

@@ -26,7 +26,8 @@ h2 {
     margin-right: auto;
     display: grid;
     grid-template-columns: minmax(auto, 125px) minmax(auto, 46px) 1fr minmax(auto, 46px) minmax(auto, 125px);
-    grid-auto-rows: min-content;
+    min-height: 100vh;
+    height: auto;
 }
 
 .container {
@@ -39,8 +40,6 @@ h2 {
     color: $primary;
 }
 
-
-
 .line{
     height: 1px;
     background-color: $primary;
@@ -49,5 +48,9 @@ h2 {
 .small-logo-image{
     width: 1.2rem;
     height: auto;
+}
+
+.block-heading{
+    margin-bottom: 50px;
 }
 

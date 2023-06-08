@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { SkillProps } from './skill.interfaces'
+import { ISkillProps } from './skill.interfaces'
 
 import styles from  '@/styles/pages/home/skills.module.scss'
 
 
-export default function Skill(props: {skill: SkillProps}) {
+export default function Skill(props: {skill: ISkillProps}) {
     const { heading, technologies } = props.skill;
   
   return (
