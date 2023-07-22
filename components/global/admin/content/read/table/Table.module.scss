@@ -1,0 +1,34 @@
+.container {
+  text-align: left;
+  align-self: flex-start;
+  margin-top: 20px;
+  width: 100%;
+  padding: 0 10px;
+
+  table {
+    width: 100%;
+    text-align: center;
+
+    tr {
+      th {
+        padding-bottom: 10px;
+        text-transform: uppercase;
+      }
+
+      td {
+        max-width: fit-content;
+
+        img {
+          max-width: 200px;
+          padding: 20px 0 20px 0;
+        }
+      }
+
+      td,
+      th {
+        padding-right: 20px;
+        text-align: left;
+      }
+    }
+  }
+}

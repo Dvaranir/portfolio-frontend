@@ -15,12 +15,12 @@ export default NextAuth({
             password: { label: "Password", type: "password" }
           },
           async authorize(credentials, req) {
-
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/authenticate`, {
+            
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/authenticate`, {
               email: credentials?.username,
               password: credentials?.password
             })
-
+            
             const jwt = response.data.token
 
             if(jwt){

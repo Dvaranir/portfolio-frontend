@@ -1,0 +1,39 @@
+@import "@/styles/core/index.scss";
+
+$transition-time: 0.5s;
+
+.aside-button {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 20px 1fr;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 7px 0;
+  transition: all $transition-time;
+  width: 90%;
+  padding: 5px;
+
+  .icon-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  &.center {
+    justify-content: center;
+  }
+
+  span {
+    color: $white;
+    transition: all $transition-time;
+  }
+
+  &:hover {
+    background-color: $primary;
+    color: $dark-gray;
+    span {
+      color: $dark-gray;
+    }
+  }
+}
