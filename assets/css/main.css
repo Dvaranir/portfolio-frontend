@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+html, :host{
+    line-height: 1;
+}
