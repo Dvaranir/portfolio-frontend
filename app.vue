@@ -1,8 +1,14 @@
+<script lang="ts" setup>
+
+</script>
+
 <template>
-  <ClientOnly>
-    <NuxtLoadingIndicator color="#9BCB30" />
-  </ClientOnly>
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+  <div class="content dark">
+    <ClientOnly>
+      <NuxtLoadingIndicator color="#9BCB30" />
+    </ClientOnly>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </div>
 </template>
