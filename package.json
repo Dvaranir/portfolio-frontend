@@ -9,13 +9,13 @@
   "scripts": {
     "build": "nuxt build --dotenv .env.production",
     "dev": "nuxt dev --dotenv .env.development",
-    "debug": "nuxt dev --inspect --dotenv .env.development",
+    "debug:dev": "nuxt dev --inspect --dotenv .env.development",
+    "debug:prod": "nuxt dev --inspect --dotenv .env.production",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "cross-env NODE_OPTIONS='--disable-warning=ExperimentalWarning' eslint .",
-    "lint:fix": "cross-env NODE_OPTIONS='--disable-warning=ExperimentalWarning' eslint . --fix",
-    "prepare": "husky"
+    "lint:fix": "cross-env NODE_OPTIONS='--disable-warning=ExperimentalWarning' eslint . --fix"
   },
   "dependencies": {
     "@pinia/nuxt": "0.11.0",
