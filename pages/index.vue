@@ -2,7 +2,7 @@
 
 <template>
   <div class="font-bold bg-gray-6 text-white">
-    test
+    1
   </div>
 </template>
 
