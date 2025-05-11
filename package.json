@@ -2,9 +2,8 @@
   "name": "nuxt-app",
   "type": "module",
   "private": true,
-  "packageManager": "yarn@1.22.22",
   "engines": {
-    "node": "20.x"
+    "node": ">=20.0.0"
   },
   "scripts": {
     "build": "nuxt build --dotenv .env.production",
@@ -15,7 +14,8 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "cross-env NODE_OPTIONS='--disable-warning=ExperimentalWarning' eslint .",
-    "lint:fix": "cross-env NODE_OPTIONS='--disable-warning=ExperimentalWarning' eslint . --fix"
+    "lint:fix": "cross-env NODE_OPTIONS='--disable-warning=ExperimentalWarning' eslint . --fix",
+    "preinstall": "node .husky/scripts/pre-install.js"
   },
   "dependencies": {
     "@pinia/nuxt": "0.11.0",

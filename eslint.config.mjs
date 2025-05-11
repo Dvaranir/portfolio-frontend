@@ -12,15 +12,21 @@ const configs = {
   antfu: antfu({
     formatters: true,
     stylistic: true,
+    rules: {
+      'antfu/top-level-function': 'off',
+    },
   }),
 
   unicorn: {
-    name: 'unicorn/recommended',
-    rules: unicornPlugin.configs.recommended.rules,
+    name: 'dvars:unicorn',
+    rules: {
+      ...unicornPlugin.configs.recommended.rules,
+      'unicorn/no-process-exit': 'off',
+    },
   },
 
   perfectionist: {
-    name: 'dvars/perfectionist',
+    name: 'dvars:perfectionist',
     rules: {
       'import/order': 'off',
       'sort-imports': 'off',
@@ -32,14 +38,14 @@ const configs = {
   },
 
   tailwind: {
-    name: 'dvars/tailwind',
+    name: 'dvars:tailwind',
     rules: {
       'tailwindcss/no-custom-classname': 'off',
     },
   },
 
   vue: {
-    name: 'dvars/vue',
+    name: 'dvars:vue',
     rules: {
       'vue/max-attributes-per-line': [
         'error',
@@ -48,6 +54,18 @@ const configs = {
           multiline: 1,
         },
       ],
+    },
+  },
+
+  eslint: {
+    name: 'dvars:eslint',
+    rules: {
+      'func-style': ['error', 'expression'],
+      'prefer-arrow-callback': ['error', { allowNamedFunctions: false, allowUnboundThis: true }],
+      'prefer-const': ['error', {
+        destructuring: 'all',
+        ignoreReadBeforeAssign: true,
+      }],
     },
   },
 
