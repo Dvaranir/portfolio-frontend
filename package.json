@@ -16,7 +16,9 @@
     "lint:fix": "cross-env NODE_OPTIONS='--disable-warning=ExperimentalWarning' eslint . --fix"
   },
   "dependencies": {
+    "@pinia/nuxt": "0.11.0",
     "nuxt": "^3.17.2",
+    "pinia": "^3.0.2",
     "vue": "^3.5.13",
     "vue-router": "^4.5.1"
   },
@@ -26,6 +28,9 @@
     "@tailwindcss/vite": "^4.1.5",
     "cross-env": "^7.0.3",
     "eslint": "^9.26.0",
+    "eslint-plugin-format": "^1.0.1",
+    "eslint-plugin-perfectionist": "^4.12.3",
+    "eslint-plugin-unicorn": "^59.0.1",
     "tailwindcss": "^4.1.5",
     "typescript": "^5.8.3",
     "vue-tsc": "^2.2.10"
