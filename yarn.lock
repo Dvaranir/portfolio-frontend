@@ -679,6 +679,13 @@
   dependencies:
     gsap "^3.12.5"
 
+"@iconify-json/mdi@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@iconify-json/mdi/-/mdi-1.2.3.tgz#5e4ee9d8c8aaad04381c8cc6c6edbe3327f031b5"
+  integrity sha512-O3cLwbDOK7NNDf2ihaQOH5F9JglnulNDFV7WprU2dSoZu3h3cWH//h74uQAB87brHmvFVxIOkuBX2sZSzYhScg==
+  dependencies:
+    "@iconify/types" "*"
+
 "@iconify/collections@^1.0.548":
   version "1.0.553"
   resolved "https://registry.yarnpkg.com/@iconify/collections/-/collections-1.0.553.tgz#94d30e6f94cc9704e0eab198aecf5eed858e6e3f"
