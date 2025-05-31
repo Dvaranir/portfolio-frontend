@@ -6,7 +6,6 @@ const developmentMode = process.env.NODE_ENV !== 'production'
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
-
   devtools: { enabled: developmentMode },
   sourcemap: {
     server: developmentMode,
@@ -23,7 +22,7 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
 
-  modules: ['@nuxt/eslint', '@pinia/nuxt'],
+  modules: ['@nuxt/eslint', '@pinia/nuxt', '@nuxt/icon', ['@hypernym/nuxt-gsap', { composables: true }]],
 
   eslint: {
     config: {
