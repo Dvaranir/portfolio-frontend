@@ -19,29 +19,76 @@ const getColorClass = (type: string) => {
   }
 }
 
-const codeTokens = [
-  { text: 'const', type: 'keyword' },
-  { text: ' developer = {', type: 'normal' },
-  { text: '\n  name: ', type: 'normal' },
-  { text: '"FullStack Dev"', type: 'string' },
-  { text: ',', type: 'normal' },
-  { text: '\n  skills: [', type: 'normal' },
-  { text: '"JavaScript"', type: 'string' },
-  { text: ', ', type: 'normal' },
-  { text: '"TypeScript"', type: 'string' },
-  { text: ', ', type: 'normal' },
-  { text: '"Python"', type: 'string' },
-  { text: '],', type: 'normal' },
-  { text: '\n  passion: ', type: 'normal' },
-  { text: '"Creating amazing apps"', type: 'string' },
-  { text: ',', type: 'normal' },
-  { text: '\n  experience: ', type: 'normal' },
-  { text: '"5+ years"', type: 'string' },
-  { text: '\n};', type: 'normal' },
-]
+const fullCode = `const developer = {
+  name: "FullStack Dev",
+  skills: ["JavaScript", "TypeScript", "Python"],
+  passion: "Creating amazing apps",
+  experience: "5+ years"
+};`
 
-const displayedTokens = ref<Array<{ text: string, type: string, isComplete: boolean }>>([])
+const keywords = new Set(['const', 'let', 'var', 'function', 'class', 'if', 'else', 'for', 'while', 'return', 'import', 'export'])
 const showCursor = ref(true)
+
+const getTokenType = (token: string) => {
+  if (keywords.has(token)) {
+    return 'keyword'
+  }
+  if (/^\d+$/.test(token)) {
+    return 'number'
+  }
+  if (/^\w+$/.test(token)) {
+    return 'property'
+  }
+  return 'normal'
+}
+
+const parseTokens = (code: string) => {
+  const tokens: Array<{ text: string, type: string }> = []
+  let current = ''
+  let inString = false
+  let stringChar = ''
+
+  for (const char of code) {
+    if (!inString && (char === '"' || char === '\'' || char === '`')) {
+      if (current) {
+        tokens.push({ text: current, type: getTokenType(current) })
+        current = ''
+      }
+      inString = true
+      stringChar = char
+      current = char
+    }
+    else if (inString && char === stringChar) {
+      current += char
+      tokens.push({ text: current, type: 'string' })
+      current = ''
+      inString = false
+      stringChar = ''
+    }
+    else if (inString) {
+      current += char
+    }
+    else if (/\s/.test(char) || /[{}(),;:[\]]/.test(char)) {
+      if (current) {
+        tokens.push({ text: current, type: getTokenType(current) })
+        current = ''
+      }
+      tokens.push({ text: char, type: 'normal' })
+    }
+    else {
+      current += char
+    }
+  }
+
+  if (current) {
+    tokens.push({ text: current, type: getTokenType(current) })
+  }
+
+  return tokens
+}
+
+const codeTokens = parseTokens(fullCode)
+const displayedTokens = ref<Array<{ text: string, type: string, currentText: string }>>([])
 const currentTokenIndex = ref(0)
 const currentCharIndex = ref(0)
 
@@ -55,9 +102,9 @@ const typeCode = () => {
 
   if (currentCharIndex.value === 0) {
     displayedTokens.value.push({
-      text: '',
+      text: token.text,
       type: token.type,
-      isComplete: false,
+      currentText: '',
     })
   }
 
@@ -65,15 +112,14 @@ const typeCode = () => {
   const targetText = token.text
 
   if (currentCharIndex.value < targetText.length) {
-    currentDisplayToken.text = targetText.slice(0, currentCharIndex.value + 1)
+    currentDisplayToken.currentText = targetText.slice(0, currentCharIndex.value + 1)
     currentCharIndex.value++
-    setTimeout(typeCode, 30)
+    setTimeout(typeCode, 50)
   }
   else {
-    currentDisplayToken.isComplete = true
     currentTokenIndex.value++
     currentCharIndex.value = 0
-    setTimeout(typeCode, 100)
+    setTimeout(typeCode, 20)
   }
 }
 
@@ -162,7 +208,7 @@ onMounted(() => {
                 v-for="(token, index) in displayedTokens"
                 :key="index"
                 :class="getColorClass(token.type)"
-              >{{ token.text }}</span><span v-if="showCursor" class="text-gray-200">|</span>
+              >{{ token.currentText }}</span><span v-if="showCursor" class="text-gray-200">|</span>
             </div>
           </div>
 
