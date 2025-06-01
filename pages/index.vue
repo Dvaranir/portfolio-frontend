@@ -28,7 +28,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section class="relative min-h-svh flex items-center justify-center overflow-hidden">
       <div class="absolute inset-0 bg-gradient-to-br from-green/10 via-transparent to-gray-2" />
 
       <div class="container mx-auto px-4 relative z-10">

@@ -128,7 +128,7 @@ watch(currentSlide, (newSlide) => {
 </script>
 
 <template>
-  <section class="big-projects-section py-20 lg:py-32">
+  <section class="big-projects-section py-10 lg:py-16">
     <div class="container mx-auto px-4">
       <div class="text-center mb-16">
         <h2 class="text-4xl lg:text-5xl font-bold text-gray-12 mb-6">

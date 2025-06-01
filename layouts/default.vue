@@ -19,7 +19,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-1 text-gray-12 transition-colors duration-300">
+  <div class="min-h-svh bg-gray-1 text-gray-12 transition-colors duration-300">
     <Header />
     <main class="pt-16">
       <slot />

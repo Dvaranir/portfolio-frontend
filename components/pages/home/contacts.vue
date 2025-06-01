@@ -62,7 +62,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <section id="contacts" class="contacts-section py-20 lg:py-32 bg-gray-2 relative overflow-hidden">
+  <section id="contacts" class="contacts-section py-10 lg:py-16 bg-gray-2 relative overflow-hidden">
     <div class="container mx-auto px-4">
       <div class="text-center mb-16">
         <h2 class="contacts-title text-4xl lg:text-5xl font-bold text-gray-12 mb-6">

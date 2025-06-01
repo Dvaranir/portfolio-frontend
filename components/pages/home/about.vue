@@ -62,7 +62,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="about-section section-fade py-20 lg:py-32 relative overflow-hidden">
+  <section class="about-section section-fade py-10 lg:py-16 relative overflow-hidden">
     <div class="container mx-auto px-4">
       <div class="grid lg:grid-cols-2 gap-16 items-center">
         <div class="space-y-8">

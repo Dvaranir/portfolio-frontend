@@ -164,7 +164,7 @@ useHead({
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-1">
+  <div class="min-h-svh bg-gray-1">
     <section class="page-header py-20 bg-gradient-to-b from-gray-2 to-gray-1">
       <div class="container mx-auto px-4">
         <nav class="mb-8">

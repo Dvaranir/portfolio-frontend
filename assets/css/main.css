@@ -2,6 +2,7 @@
 @import './variables.css';
 
 @theme {
+  --color-green: var(--color-green);
 	--color-gray-1: var(--color-gray-1);
 	--color-gray-2: var(--color-gray-2);
 	--color-gray-3: var(--color-gray-3);
