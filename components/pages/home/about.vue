@@ -194,16 +194,16 @@ onMounted(() => {
           </div>
         </div>
 
-        <div class="code-animation relative">
-          <div class="bg-gray-900 border border-gray-700 rounded-2xl p-6 shadow-2xl">
+        <div class="code-animation relative mx-auto max-w-full">
+          <div class="bg-gray-900 border border-gray-700 rounded-2xl p-3 sm:p-6 shadow-2xl overflow-hidden">
             <div class="flex items-center gap-2 mb-4 pb-4 border-b border-gray-700">
               <div class="w-3 h-3 bg-red-500 rounded-full" />
               <div class="w-3 h-3 bg-yellow-500 rounded-full" />
               <div class="w-3 h-3 bg-green-500 rounded-full" />
-              <span class="ml-4 text-sm text-gray-400 font-mono">developer.js</span>
+              <span class="ml-4 text-xs sm:text-sm text-gray-400 font-mono">developer.js</span>
             </div>
 
-            <div class="typing-code min-h-[150px] bg-gray-900 text-gray-200 font-mono text-sm leading-relaxed p-4 whitespace-pre">
+            <div class="typing-code min-h-[120px] sm:min-h-[150px] bg-gray-900 text-gray-200 font-mono text-xs sm:text-sm leading-relaxed p-2 sm:p-4 whitespace-pre overflow-x-auto">
               <span
                 v-for="(token, index) in displayedTokens"
                 :key="index"
@@ -212,21 +212,53 @@ onMounted(() => {
             </div>
           </div>
 
-          <div class="absolute -top-4 -right-4 floating-icon">
-            <div class="w-12 h-12 bg-gradient-to-br from-green to-green/80 rounded-lg flex items-center justify-center shadow-lg">
-              <Icon name="mdi:vuejs" class="w-6 h-6 text-white" />
+          <!-- Floating icons - адаптивные позиции -->
+          <div class="hidden sm:block absolute -top-4 -right-4 floating-icon">
+            <div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shadow-lg">
+              <Icon name="mdi:language-go" class="w-6 h-6 text-white" />
             </div>
           </div>
 
-          <div class="absolute -bottom-4 -left-4 floating-icon">
+          <div class="hidden sm:block absolute -bottom-4 -left-4 floating-icon">
             <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-lg">
               <Icon name="mdi:nodejs" class="w-6 h-6 text-white" />
             </div>
           </div>
 
-          <div class="absolute top-1/2 -right-8 floating-icon">
+          <div class="hidden sm:block absolute top-1/2 -right-8 floating-icon">
             <div class="w-10 h-10 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-lg flex items-center justify-center shadow-lg">
               <Icon name="mdi:language-javascript" class="w-5 h-5 text-white" />
+            </div>
+          </div>
+
+          <div class="hidden lg:block absolute -top-8 left-1/4 floating-icon">
+            <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-lg">
+              <Icon name="mdi:language-php" class="w-5 h-5 text-white" />
+            </div>
+          </div>
+
+          <div class="hidden lg:block absolute -bottom-8 right-1/4 floating-icon">
+            <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center shadow-lg">
+              <Icon name="mdi:language-python" class="w-5 h-5 text-white" />
+            </div>
+          </div>
+
+          <!-- Мобильные иконки внизу -->
+          <div class="sm:hidden flex justify-center gap-4 mt-6">
+            <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shadow-lg">
+              <Icon name="mdi:language-go" class="w-5 h-5 text-white" />
+            </div>
+            <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-lg">
+              <Icon name="mdi:nodejs" class="w-5 h-5 text-white" />
+            </div>
+            <div class="w-10 h-10 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-lg flex items-center justify-center shadow-lg">
+              <Icon name="mdi:language-javascript" class="w-5 h-5 text-white" />
+            </div>
+            <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-lg">
+              <Icon name="mdi:language-php" class="w-5 h-5 text-white" />
+            </div>
+            <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center shadow-lg">
+              <Icon name="mdi:language-python" class="w-5 h-5 text-white" />
             </div>
           </div>
         </div>
