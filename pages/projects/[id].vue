@@ -289,7 +289,7 @@ useHead({
               :href="project.github"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center gap-2 px-6 py-3 bg-gray-12 text-gray-1 rounded-lg hover:bg-gray-11 transition-all duration-300 hover:scale-105"
+              class="flex items-center gap-2 px-6 py-3 bg-gray-12 text-gray-1 rounded-lg transform hover:bg-gray-11 transition-all duration-300 hover:scale-105"
             >
               <Icon name="mdi:github" class="w-5 h-5" />
               GitHub
@@ -299,7 +299,7 @@ useHead({
               :href="project.demo"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center gap-2 px-6 py-3 bg-green text-white rounded-lg hover:bg-green/90 transition-all duration-300 hover:scale-105"
+              class="flex items-center gap-2 px-6 py-3 bg-green text-white rounded-lg transform hover:bg-green/90 transition-all duration-300 hover:scale-105"
             >
               <Icon name="mdi:open-in-new" class="w-5 h-5" />
               Посмотреть проект
@@ -363,7 +363,7 @@ useHead({
                         <img
                           :src="linkedProject.images[0]"
                           :alt="linkedProject.title"
-                          class="w-full h-64 md:h-80 object-cover hover:scale-110 transition-transform duration-500"
+                          class="w-full h-64 md:h-80 object-cover transform hover:scale-110 transition-transform duration-500"
                         >
                       </div>
 
@@ -387,7 +387,7 @@ useHead({
 
                         <NuxtLink
                           :to="`/projects/${linkedProject.id}`"
-                          class="inline-flex items-center gap-2 px-6 py-3 bg-green text-white rounded-lg hover:bg-green/90 transition-all duration-300 hover:scale-105 w-fit"
+                          class="inline-flex items-center gap-2 px-6 py-3 bg-green text-white rounded-lg transform hover:bg-green/90 transition-all duration-300 hover:scale-105 w-fit"
                         >
                           Подробнее
                           <Icon name="mdi:arrow-right" class="w-4 h-4" />

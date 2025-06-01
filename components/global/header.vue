@@ -61,7 +61,7 @@ watch(isMenuOpen, (newValue) => {
           <img
             src="https://avatars.githubusercontent.com/u/87989392?v=4"
             alt="Developer Logo"
-            class="w-10 h-10 rounded-full ring-2 ring-green transition-all duration-300 group-hover:ring-4 group-hover:scale-110"
+            class="w-10 h-10 rounded-full ring-2 ring-green transform transition-all duration-300 group-hover:ring-4 group-hover:scale-110"
           >
           <div class="absolute -top-1 -right-1 w-4 h-4 bg-green rounded-full animate-pulse" />
         </div>
@@ -82,7 +82,7 @@ watch(isMenuOpen, (newValue) => {
 
       <div class="flex items-center space-x-4">
         <button
-          class="w-10 h-10 rounded-full bg-gray-3 hover:bg-gray-4 flex items-center justify-center transition-all duration-300 hover:scale-110"
+          class="w-10 h-10 rounded-full bg-gray-3 hover:bg-gray-4 flex items-center justify-center transform transition-all duration-300 hover:scale-110"
           :title="coreStore.isThemeDark ? 'Светлая тема' : 'Тёмная тема'"
           @click="coreStore.toggleTheme"
         >
@@ -100,7 +100,7 @@ watch(isMenuOpen, (newValue) => {
             :href="social.url"
             target="_blank"
             rel="noopener noreferrer"
-            class="social-link w-10 h-10 rounded-full bg-gray-3 hover:bg-green flex items-center justify-center transition-all duration-300 hover:scale-110 group"
+            class="social-link w-10 h-10 rounded-full bg-gray-3 hover:bg-green flex items-center justify-center transform transition-all duration-300 hover:scale-110 group"
             :title="social.name"
           >
             <Icon

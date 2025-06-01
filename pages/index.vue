@@ -51,13 +51,13 @@ onMounted(() => {
           <div class="hero-cta flex flex-col sm:flex-row gap-4 justify-center">
             <NuxtLink
               to="/projects"
-              class="px-8 py-4 bg-green text-white rounded-lg font-semibold hover:bg-green/90 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+              class="px-8 py-4 bg-green text-white rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:bg-green/90 hover:shadow-lg origin-center"
             >
               Посмотреть проекты
             </NuxtLink>
             <a
               href="#contacts"
-              class="px-8 py-4 border-2 border-green text-green rounded-lg font-semibold hover:bg-green hover:text-white transition-all duration-300 hover:scale-105"
+              class="px-8 py-4 border-2 border-green text-green rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:bg-green hover:text-white origin-center"
             >
               Связаться со мной
             </a>

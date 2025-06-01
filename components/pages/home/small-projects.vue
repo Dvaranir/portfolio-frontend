@@ -121,7 +121,7 @@ watch(currentSlide, (newSlide) => {
                     <img
                       :src="project.image"
                       :alt="project.title"
-                      class="w-full h-64 md:h-80 object-cover group-hover:scale-110 transition-transform duration-500"
+                      class="w-full h-64 md:h-80 object-cover transform group-hover:scale-110 transition-transform duration-500"
                     >
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
@@ -149,7 +149,7 @@ watch(currentSlide, (newSlide) => {
                         :href="project.github"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="flex items-center gap-2 px-6 py-3 bg-green text-white rounded-lg hover:bg-green/90 transition-all duration-300 hover:scale-105"
+                        class="flex items-center gap-2 px-6 py-3 bg-green text-white rounded-lg transform hover:bg-green/90 transition-all duration-300 hover:scale-105"
                       >
                         <Icon name="mdi:github" class="w-4 h-4" />
                         GitHub
@@ -193,7 +193,7 @@ watch(currentSlide, (newSlide) => {
       <div class="text-center mt-12">
         <NuxtLink
           to="/projects?size=small"
-          class="inline-flex items-center gap-2 px-8 py-4 bg-gray-1 border-2 border-green text-green rounded-lg font-semibold hover:bg-green hover:text-white transition-all duration-300 hover:scale-105"
+          class="inline-flex items-center gap-2 px-8 py-4 bg-gray-1 border-2 border-green text-green rounded-lg font-semibold transform hover:bg-green hover:text-white transition-all duration-300 hover:scale-105"
         >
           Посмотреть все маленькие проекты
           <Icon name="mdi:arrow-right" class="w-5 h-5" />
