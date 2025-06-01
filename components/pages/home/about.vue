@@ -21,7 +21,13 @@ const getColorClass = (type: string) => {
 
 const fullCode = `const developer = {
   name: "FullStack Dev",
-  skills: ["JavaScript", "TypeScript", "Python"],
+  skills: [
+    "JavaScript", 
+    "TypeScript", 
+    "Python", 
+    "PHP", 
+    "Go"
+  ],
   passion: "Creating amazing apps",
   experience: "5+ years"
 };`
@@ -194,16 +200,16 @@ onMounted(() => {
           </div>
         </div>
 
-        <div class="code-animation relative mx-auto max-w-full">
-          <div class="bg-gray-900 border border-gray-700 rounded-2xl p-3 sm:p-6 shadow-2xl overflow-hidden">
-            <div class="flex items-center gap-2 mb-4 pb-4 border-b border-gray-700">
-              <div class="w-3 h-3 bg-red-500 rounded-full" />
-              <div class="w-3 h-3 bg-yellow-500 rounded-full" />
-              <div class="w-3 h-3 bg-green-500 rounded-full" />
-              <span class="ml-4 text-xs sm:text-sm text-gray-400 font-mono">developer.js</span>
+        <div class="code-animation relative w-full max-w-full">
+          <div class="bg-gray-900 border border-gray-700 rounded-lg xs:rounded-xl sm:rounded-2xl p-2 xs:p-3 sm:p-4 lg:p-6 shadow-2xl overflow-hidden mx-auto max-w-full">
+            <div class="flex items-center gap-1 xs:gap-2 mb-2 xs:mb-3 sm:mb-4 pb-2 xs:pb-3 sm:pb-4 border-b border-gray-700">
+              <div class="w-2 h-2 xs:w-2.5 xs:h-2.5 sm:w-3 sm:h-3 bg-red-500 rounded-full" />
+              <div class="w-2 h-2 xs:w-2.5 xs:h-2.5 sm:w-3 sm:h-3 bg-yellow-500 rounded-full" />
+              <div class="w-2 h-2 xs:w-2.5 xs:h-2.5 sm:w-3 sm:h-3 bg-green-500 rounded-full" />
+              <span class="ml-2 xs:ml-3 sm:ml-4 text-[10px] xs:text-xs sm:text-sm text-gray-400 font-mono">developer.js</span>
             </div>
 
-            <div class="typing-code min-h-[120px] sm:min-h-[150px] bg-gray-900 text-gray-200 font-mono text-xs sm:text-sm leading-relaxed p-2 sm:p-4 whitespace-pre overflow-x-auto">
+            <div class="typing-code min-h-[80px] xs:min-h-[100px] sm:min-h-[120px] md:min-h-[140px] lg:min-h-[150px] bg-gray-900 text-gray-200 font-mono text-[9px] xs:text-[10px] sm:text-xs md:text-sm leading-tight xs:leading-snug sm:leading-relaxed p-1 xs:p-2 sm:p-3 lg:p-4 whitespace-pre overflow-x-auto">
               <span
                 v-for="(token, index) in displayedTokens"
                 :key="index"
@@ -212,53 +218,51 @@ onMounted(() => {
             </div>
           </div>
 
-          <!-- Floating icons - адаптивные позиции -->
-          <div class="hidden sm:block absolute -top-4 -right-4 floating-icon">
+          <div class="hidden lg:block absolute -top-4 -right-4 floating-icon">
             <div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shadow-lg">
               <Icon name="mdi:language-go" class="w-6 h-6 text-white" />
             </div>
           </div>
 
-          <div class="hidden sm:block absolute -bottom-4 -left-4 floating-icon">
+          <div class="hidden lg:block absolute -bottom-4 -left-4 floating-icon">
             <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-lg">
               <Icon name="mdi:nodejs" class="w-6 h-6 text-white" />
             </div>
           </div>
 
-          <div class="hidden sm:block absolute top-1/2 -right-8 floating-icon">
+          <div class="hidden lg:block absolute top-1/2 -right-8 floating-icon">
             <div class="w-10 h-10 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-lg flex items-center justify-center shadow-lg">
               <Icon name="mdi:language-javascript" class="w-5 h-5 text-white" />
             </div>
           </div>
 
-          <div class="hidden lg:block absolute -top-8 left-1/4 floating-icon">
+          <div class="hidden xl:block absolute -top-8 left-1/4 floating-icon">
             <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-lg">
               <Icon name="mdi:language-php" class="w-5 h-5 text-white" />
             </div>
           </div>
 
-          <div class="hidden lg:block absolute -bottom-8 right-1/4 floating-icon">
+          <div class="hidden xl:block absolute -bottom-8 right-1/4 floating-icon">
             <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center shadow-lg">
               <Icon name="mdi:language-python" class="w-5 h-5 text-white" />
             </div>
           </div>
 
-          <!-- Мобильные иконки внизу -->
-          <div class="sm:hidden flex justify-center gap-4 mt-6">
-            <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shadow-lg">
-              <Icon name="mdi:language-go" class="w-5 h-5 text-white" />
+          <div class="lg:hidden flex justify-center flex-wrap gap-2 xs:gap-3 sm:gap-4 mt-3 xs:mt-4 sm:mt-6">
+            <div class="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-md xs:rounded-lg flex items-center justify-center shadow-lg">
+              <Icon name="mdi:language-go" class="w-4 h-4 xs:w-5 xs:h-5 text-white" />
             </div>
-            <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-lg">
-              <Icon name="mdi:nodejs" class="w-5 h-5 text-white" />
+            <div class="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-md xs:rounded-lg flex items-center justify-center shadow-lg">
+              <Icon name="mdi:nodejs" class="w-4 h-4 xs:w-5 xs:h-5 text-white" />
             </div>
-            <div class="w-10 h-10 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-lg flex items-center justify-center shadow-lg">
-              <Icon name="mdi:language-javascript" class="w-5 h-5 text-white" />
+            <div class="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-md xs:rounded-lg flex items-center justify-center shadow-lg">
+              <Icon name="mdi:language-javascript" class="w-4 h-4 xs:w-5 xs:h-5 text-white" />
             </div>
-            <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-lg">
-              <Icon name="mdi:language-php" class="w-5 h-5 text-white" />
+            <div class="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-md xs:rounded-lg flex items-center justify-center shadow-lg">
+              <Icon name="mdi:language-php" class="w-4 h-4 xs:w-5 xs:h-5 text-white" />
             </div>
-            <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center shadow-lg">
-              <Icon name="mdi:language-python" class="w-5 h-5 text-white" />
+            <div class="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-md xs:rounded-lg flex items-center justify-center shadow-lg">
+              <Icon name="mdi:language-python" class="w-4 h-4 xs:w-5 xs:h-5 text-white" />
             </div>
           </div>
         </div>
