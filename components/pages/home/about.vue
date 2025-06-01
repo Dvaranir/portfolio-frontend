@@ -56,19 +56,41 @@ onMounted(() => {
     { text: '\n};', type: 'normal' },
   ]
 
+  const createCursor = () => {
+    const cursor = document.createElement('span')
+    cursor.className = 'typing-cursor text-white font-mono text-sm'
+    cursor.textContent = '|'
+    return cursor
+  }
+
   let currentToken = 0
+  let activeCursor: HTMLElement | undefined
+
   const typeCode = () => {
     if (currentToken < codeLines.length) {
       const token = codeLines[currentToken]
-      const codeElement = document.querySelector('.typing-code')
-      if (codeElement) {
+      const codeContainer = document.querySelector('.code-content')
+      if (codeContainer) {
+        if (activeCursor) {
+          activeCursor.remove()
+          activeCursor = undefined
+        }
+
         const span = document.createElement('span')
         span.className = `${getColorClass(token.type)} font-mono text-sm whitespace-pre`
-        codeElement.append(span)
+        codeContainer.append(span)
 
         let index = 0
         const typing = setInterval(() => {
-          span.textContent = token.text.slice(0, Math.max(0, index + 1))
+          const currentText = token.text.slice(0, Math.max(0, index + 1))
+          span.textContent = currentText
+
+          if (activeCursor) {
+            activeCursor.remove()
+          }
+          activeCursor = createCursor()
+          span.after(activeCursor)
+
           index++
           if (index >= token.text.length) {
             clearInterval(typing)
@@ -76,6 +98,12 @@ onMounted(() => {
             setTimeout(typeCode, 100)
           }
         }, 30)
+      }
+    }
+    else {
+      if (activeCursor) {
+        activeCursor.remove()
+        activeCursor = undefined
       }
     }
   }
@@ -144,11 +172,8 @@ onMounted(() => {
               <span class="ml-4 text-sm text-gray-400 font-mono">developer.js</span>
             </div>
 
-            <div class="typing-code min-h-[150px] bg-gray-900 text-gray-200 font-mono text-sm leading-relaxed">
-              <div class="flex items-center">
-                <span class="text-gray-500 font-mono text-sm mr-2">1</span>
-                <div class="w-2 h-4 bg-white animate-pulse" />
-              </div>
+            <div class="typing-code min-h-[150px] bg-gray-900 text-gray-200 font-mono text-sm leading-relaxed p-4">
+              <div class="code-content" />
             </div>
           </div>
 
