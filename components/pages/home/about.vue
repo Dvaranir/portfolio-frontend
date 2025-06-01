@@ -31,7 +31,7 @@ onMounted(() => {
       const codeElement = document.querySelector('.typing-code')
       if (codeElement) {
         const span = document.createElement('div')
-        span.className = 'code-line text-green font-mono text-sm'
+        span.className = 'code-line text-green font-mono text-sm whitespace-pre'
         codeElement.append(span)
 
         let index = 0
