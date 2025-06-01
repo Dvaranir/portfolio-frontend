@@ -61,7 +61,7 @@ watch(isMenuOpen, (newValue) => {
           <img
             src="https://avatars.githubusercontent.com/u/87989392?v=4"
             alt="Developer Logo"
-            class="w-10 h-10 rounded-full ring-2 ring-green transform transition-all duration-300 group-hover:ring-4 group-hover:scale-110"
+            class="w-10 h-10 rounded-full ring-2 ring-green !transition-all duration-300 group-hover:ring-4 group-hover:scale-110"
           >
           <div class="absolute -top-1 -right-1 w-4 h-4 bg-green rounded-full animate-pulse" />
         </div>
@@ -76,13 +76,13 @@ watch(isMenuOpen, (newValue) => {
           class="nav-item text-gray-11 hover:text-green transition-colors duration-300 font-medium relative group"
         >
           {{ item.name }}
-          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green transition-all duration-300 group-hover:w-full" />
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green !transition-all duration-300 group-hover:w-full" />
         </NuxtLink>
       </nav>
 
       <div class="flex items-center space-x-4">
         <button
-          class="w-10 h-10 rounded-full bg-gray-3 hover:bg-gray-4 flex items-center justify-center transform transition-all duration-300 hover:scale-110"
+          class="w-10 h-10 rounded-full bg-gray-3 hover:bg-gray-4 flex items-center justify-center !transition-all duration-300 hover:scale-110"
           :title="coreStore.isThemeDark ? 'Светлая тема' : 'Тёмная тема'"
           @click="coreStore.toggleTheme"
         >
@@ -100,7 +100,7 @@ watch(isMenuOpen, (newValue) => {
             :href="social.url"
             target="_blank"
             rel="noopener noreferrer"
-            class="social-link w-10 h-10 rounded-full bg-gray-3 hover:bg-green flex items-center justify-center transform transition-all duration-300 hover:scale-110 group"
+            class="social-link w-10 h-10 rounded-full bg-gray-3 hover:bg-green flex items-center justify-center !transition-all duration-300 hover:scale-110 group"
             :title="social.name"
           >
             <Icon
@@ -111,7 +111,7 @@ watch(isMenuOpen, (newValue) => {
         </div>
 
         <button
-          class="lg:hidden w-10 h-10 rounded-lg bg-gray-3 hover:bg-gray-4 flex items-center justify-center transition-all duration-300"
+          class="lg:hidden w-10 h-10 rounded-lg bg-gray-3 hover:bg-gray-4 flex items-center justify-center !transition-all duration-300"
           @click="toggleMenu"
         >
           <Icon
@@ -124,7 +124,7 @@ watch(isMenuOpen, (newValue) => {
     </div>
 
     <div
-      class="mobile-menu fixed top-16 right-0 w-80 h-[calc(100vh-4rem)] bg-gray-1 border-l border-gray-4 transform translate-x-full lg:hidden"
+      class="mobile-menu fixed top-16 right-0 w-80 h-[calc(100vh-4rem)] bg-gray-1 border-l border-gray-4 translate-x-full lg:hidden"
     >
       <div class="p-6 space-y-6">
         <nav class="space-y-4">
@@ -132,7 +132,7 @@ watch(isMenuOpen, (newValue) => {
             v-for="item in navItems"
             :key="item.name"
             :to="item.href"
-            class="mobile-nav-item block px-4 py-3 rounded-lg bg-gray-2 hover:bg-green hover:text-white transition-all duration-300 text-gray-11 font-medium"
+            class="mobile-nav-item block px-4 py-3 rounded-lg bg-gray-2 hover:bg-green hover:text-white !transition-all duration-300 text-gray-11 font-medium"
             @click="toggleMenu"
           >
             {{ item.name }}
@@ -150,7 +150,7 @@ watch(isMenuOpen, (newValue) => {
               :href="social.url"
               target="_blank"
               rel="noopener noreferrer"
-              class="mobile-nav-item flex flex-col items-center p-4 rounded-lg bg-gray-2 hover:bg-green hover:text-white transition-all duration-300 group"
+              class="mobile-nav-item flex flex-col items-center p-4 rounded-lg bg-gray-2 hover:bg-green hover:text-white !transition-all duration-300 group"
             >
               <Icon
                 :name="social.icon"

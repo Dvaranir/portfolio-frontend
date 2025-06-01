@@ -147,12 +147,12 @@ watch(currentSlide, (newSlide) => {
           class="project-card group cursor-pointer"
           :class="{ 'lg:col-span-2': project.featured && index < 2 }"
         >
-          <div class="bg-gray-2 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+          <div class="bg-gray-2 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
             <div class="relative overflow-hidden">
               <img
                 :src="project.image"
                 :alt="project.title"
-                class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-700"
+                class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
                 :class="{ 'lg:h-80': project.featured && index < 2 }"
               >
               <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -297,7 +297,7 @@ watch(currentSlide, (newSlide) => {
       <div class="text-center mt-12">
         <NuxtLink
           to="/projects?size=big"
-          class="inline-flex items-center gap-2 px-8 py-4 bg-green text-white rounded-lg font-semibold transform hover:bg-green/90 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+          class="inline-flex items-center gap-2 px-8 py-4 bg-green text-white rounded-lg font-semibold hover:bg-green/90 transition-all duration-300 hover:scale-105 hover:shadow-lg"
         >
           Посмотреть все большие проекты
           <Icon name="mdi:arrow-right" class="w-5 h-5" />

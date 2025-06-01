@@ -83,10 +83,10 @@ onMounted(() => {
           rel="noopener noreferrer"
           class="contact-card group block"
         >
-          <div class="bg-gray-1 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-4 hover:border-green/50">
+          <div class="bg-gray-1 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-4 hover:border-green/50">
             <div class="relative mb-6">
               <div
-                class="w-16 h-16 rounded-2xl bg-gradient-to-br flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300"
+                class="w-16 h-16 rounded-2xl bg-gradient-to-br flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
                 :class="contact.color"
               >
                 <Icon :name="contact.icon" class="w-8 h-8 text-white" />
@@ -121,7 +121,7 @@ onMounted(() => {
           </p>
           <a
             href="mailto:your.email@example.com"
-            class="inline-flex items-center gap-2 px-8 py-4 bg-green text-white rounded-lg font-semibold transform hover:bg-green/90 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+            class="inline-flex items-center gap-2 px-8 py-4 bg-green text-white rounded-lg font-semibold hover:bg-green/90 transition-all duration-300 hover:scale-105 hover:shadow-lg"
           >
             <Icon name="mdi:rocket-launch" class="w-5 h-5" />
             Начать проект

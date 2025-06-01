@@ -59,7 +59,7 @@ onMounted(() => {
               :href="social.url"
               target="_blank"
               rel="noopener noreferrer"
-              class="w-8 h-8 rounded-lg bg-gray-4 hover:bg-green flex items-center justify-center transform transition-all duration-300 hover:scale-110 group"
+              class="w-8 h-8 rounded-lg bg-gray-4 hover:bg-green flex items-center justify-center transition-all duration-300 hover:scale-110 group"
               :title="social.name"
             >
               <Icon

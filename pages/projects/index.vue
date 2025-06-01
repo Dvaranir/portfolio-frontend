@@ -285,12 +285,12 @@ useHead({
             :key="project.id"
             class="project-grid-item group cursor-pointer"
           >
-            <div class="bg-gray-2 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-4 hover:border-green/50">
+            <div class="bg-gray-2 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-4 hover:border-green/50">
               <div class="relative overflow-hidden">
                 <img
                   :src="project.images[0]"
                   :alt="project.title"
-                  class="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-700"
+                  class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700"
                 >
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
