@@ -15,35 +15,67 @@ onMounted(() => {
     .fromTo('.about-text', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 }, '-=0.4')
     .fromTo('.code-animation', { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 1, ease: 'back.out(1.7)' }, '-=0.6')
 
+  const getColorClass = (type: string) => {
+    switch (type) {
+      case 'keyword': {
+        return 'text-purple-400'
+      }
+      case 'string': {
+        return 'text-yellow-300'
+      }
+      case 'property': {
+        return 'text-blue-300'
+      }
+      case 'number': {
+        return 'text-orange-400'
+      }
+      default: {
+        return 'text-gray-200'
+      }
+    }
+  }
+
   const codeLines = [
-    'const developer = {',
-    '  name: "FullStack Dev",',
-    '  skills: ["JavaScript", "TypeScript", "Python"],',
-    '  passion: "Creating amazing apps",',
-    '  experience: "5+ years"',
-    '};',
+    { text: 'const', type: 'keyword' },
+    { text: ' developer = {', type: 'normal' },
+    { text: '\n  name: ', type: 'normal' },
+    { text: '"FullStack Dev"', type: 'string' },
+    { text: ',', type: 'normal' },
+    { text: '\n  skills: [', type: 'normal' },
+    { text: '"JavaScript"', type: 'string' },
+    { text: ', ', type: 'normal' },
+    { text: '"TypeScript"', type: 'string' },
+    { text: ', ', type: 'normal' },
+    { text: '"Python"', type: 'string' },
+    { text: '],', type: 'normal' },
+    { text: '\n  passion: ', type: 'normal' },
+    { text: '"Creating amazing apps"', type: 'string' },
+    { text: ',', type: 'normal' },
+    { text: '\n  experience: ', type: 'normal' },
+    { text: '"5+ years"', type: 'string' },
+    { text: '\n};', type: 'normal' },
   ]
 
-  let currentLine = 0
+  let currentToken = 0
   const typeCode = () => {
-    if (currentLine < codeLines.length) {
-      const line = codeLines[currentLine]
+    if (currentToken < codeLines.length) {
+      const token = codeLines[currentToken]
       const codeElement = document.querySelector('.typing-code')
       if (codeElement) {
-        const span = document.createElement('div')
-        span.className = 'code-line text-green font-mono text-sm whitespace-pre'
+        const span = document.createElement('span')
+        span.className = `${getColorClass(token.type)} font-mono text-sm whitespace-pre`
         codeElement.append(span)
 
         let index = 0
         const typing = setInterval(() => {
-          span.textContent = line.slice(0, Math.max(0, index + 1))
+          span.textContent = token.text.slice(0, Math.max(0, index + 1))
           index++
-          if (index >= line.length) {
+          if (index >= token.text.length) {
             clearInterval(typing)
-            currentLine++
-            setTimeout(typeCode, 300)
+            currentToken++
+            setTimeout(typeCode, 100)
           }
-        }, 50)
+        }, 30)
       }
     }
   }
@@ -104,18 +136,18 @@ onMounted(() => {
         </div>
 
         <div class="code-animation relative">
-          <div class="bg-gray-2 border border-gray-4 rounded-2xl p-6 shadow-2xl">
-            <div class="flex items-center gap-2 mb-4 pb-4 border-b border-gray-4">
+          <div class="bg-gray-900 border border-gray-700 rounded-2xl p-6 shadow-2xl">
+            <div class="flex items-center gap-2 mb-4 pb-4 border-b border-gray-700">
               <div class="w-3 h-3 bg-red-500 rounded-full" />
               <div class="w-3 h-3 bg-yellow-500 rounded-full" />
-              <div class="w-3 h-3 bg-green rounded-full" />
-              <span class="ml-4 text-sm text-gray-8 font-mono">developer.js</span>
+              <div class="w-3 h-3 bg-green-500 rounded-full" />
+              <span class="ml-4 text-sm text-gray-400 font-mono">developer.js</span>
             </div>
 
-            <div class="typing-code space-y-1 min-h-[150px]">
+            <div class="typing-code min-h-[150px] bg-gray-900 text-gray-200 font-mono text-sm leading-relaxed">
               <div class="flex items-center">
-                <span class="text-gray-6 font-mono text-sm mr-2">1</span>
-                <div class="w-2 h-4 bg-green animate-pulse" />
+                <span class="text-gray-500 font-mono text-sm mr-2">1</span>
+                <div class="w-2 h-4 bg-white animate-pulse" />
               </div>
             </div>
           </div>
