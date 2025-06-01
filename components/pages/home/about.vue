@@ -1,4 +1,82 @@
 <script lang="ts" setup>
+const getColorClass = (type: string) => {
+  switch (type) {
+    case 'keyword': {
+      return 'text-purple-400'
+    }
+    case 'string': {
+      return 'text-yellow-300'
+    }
+    case 'property': {
+      return 'text-blue-300'
+    }
+    case 'number': {
+      return 'text-orange-400'
+    }
+    default: {
+      return 'text-gray-200'
+    }
+  }
+}
+
+const codeTokens = [
+  { text: 'const', type: 'keyword' },
+  { text: ' developer = {', type: 'normal' },
+  { text: '\n  name: ', type: 'normal' },
+  { text: '"FullStack Dev"', type: 'string' },
+  { text: ',', type: 'normal' },
+  { text: '\n  skills: [', type: 'normal' },
+  { text: '"JavaScript"', type: 'string' },
+  { text: ', ', type: 'normal' },
+  { text: '"TypeScript"', type: 'string' },
+  { text: ', ', type: 'normal' },
+  { text: '"Python"', type: 'string' },
+  { text: '],', type: 'normal' },
+  { text: '\n  passion: ', type: 'normal' },
+  { text: '"Creating amazing apps"', type: 'string' },
+  { text: ',', type: 'normal' },
+  { text: '\n  experience: ', type: 'normal' },
+  { text: '"5+ years"', type: 'string' },
+  { text: '\n};', type: 'normal' },
+]
+
+const displayedTokens = ref<Array<{ text: string, type: string, isComplete: boolean }>>([])
+const showCursor = ref(true)
+const currentTokenIndex = ref(0)
+const currentCharIndex = ref(0)
+
+const typeCode = () => {
+  if (currentTokenIndex.value >= codeTokens.length) {
+    showCursor.value = false
+    return
+  }
+
+  const token = codeTokens[currentTokenIndex.value]
+
+  if (currentCharIndex.value === 0) {
+    displayedTokens.value.push({
+      text: '',
+      type: token.type,
+      isComplete: false,
+    })
+  }
+
+  const currentDisplayToken = displayedTokens.value.at(-1)!
+  const targetText = token.text
+
+  if (currentCharIndex.value < targetText.length) {
+    currentDisplayToken.text = targetText.slice(0, currentCharIndex.value + 1)
+    currentCharIndex.value++
+    setTimeout(typeCode, 30)
+  }
+  else {
+    currentDisplayToken.isComplete = true
+    currentTokenIndex.value++
+    currentCharIndex.value = 0
+    setTimeout(typeCode, 100)
+  }
+}
+
 onMounted(() => {
   const { $gsap } = useNuxtApp()
 
@@ -14,99 +92,6 @@ onMounted(() => {
   )
     .fromTo('.about-text', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 }, '-=0.4')
     .fromTo('.code-animation', { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 1, ease: 'back.out(1.7)' }, '-=0.6')
-
-  const getColorClass = (type: string) => {
-    switch (type) {
-      case 'keyword': {
-        return 'text-purple-400'
-      }
-      case 'string': {
-        return 'text-yellow-300'
-      }
-      case 'property': {
-        return 'text-blue-300'
-      }
-      case 'number': {
-        return 'text-orange-400'
-      }
-      default: {
-        return 'text-gray-200'
-      }
-    }
-  }
-
-  const codeLines = [
-    { text: 'const', type: 'keyword' },
-    { text: ' developer = {', type: 'normal' },
-    { text: '\n  name: ', type: 'normal' },
-    { text: '"FullStack Dev"', type: 'string' },
-    { text: ',', type: 'normal' },
-    { text: '\n  skills: [', type: 'normal' },
-    { text: '"JavaScript"', type: 'string' },
-    { text: ', ', type: 'normal' },
-    { text: '"TypeScript"', type: 'string' },
-    { text: ', ', type: 'normal' },
-    { text: '"Python"', type: 'string' },
-    { text: '],', type: 'normal' },
-    { text: '\n  passion: ', type: 'normal' },
-    { text: '"Creating amazing apps"', type: 'string' },
-    { text: ',', type: 'normal' },
-    { text: '\n  experience: ', type: 'normal' },
-    { text: '"5+ years"', type: 'string' },
-    { text: '\n};', type: 'normal' },
-  ]
-
-  const createCursor = () => {
-    const cursor = document.createElement('span')
-    cursor.className = 'typing-cursor text-white font-mono text-sm'
-    cursor.textContent = '|'
-    return cursor
-  }
-
-  let currentToken = 0
-  let activeCursor: HTMLElement | undefined
-
-  const typeCode = () => {
-    if (currentToken < codeLines.length) {
-      const token = codeLines[currentToken]
-      const codeContainer = document.querySelector('.code-content')
-      if (codeContainer) {
-        if (activeCursor) {
-          activeCursor.remove()
-          activeCursor = undefined
-        }
-
-        const span = document.createElement('span')
-        span.className = `${getColorClass(token.type)} font-mono text-sm whitespace-pre`
-        codeContainer.append(span)
-
-        let index = 0
-        const typing = setInterval(() => {
-          const currentText = token.text.slice(0, Math.max(0, index + 1))
-          span.textContent = currentText
-
-          if (activeCursor) {
-            activeCursor.remove()
-          }
-          activeCursor = createCursor()
-          span.after(activeCursor)
-
-          index++
-          if (index >= token.text.length) {
-            clearInterval(typing)
-            currentToken++
-            setTimeout(typeCode, 100)
-          }
-        }, 30)
-      }
-    }
-    else {
-      if (activeCursor) {
-        activeCursor.remove()
-        activeCursor = undefined
-      }
-    }
-  }
 
   setTimeout(typeCode, 1000)
 
@@ -172,8 +157,12 @@ onMounted(() => {
               <span class="ml-4 text-sm text-gray-400 font-mono">developer.js</span>
             </div>
 
-            <div class="typing-code min-h-[150px] bg-gray-900 text-gray-200 font-mono text-sm leading-relaxed p-4">
-              <div class="code-content" />
+            <div class="typing-code min-h-[150px] bg-gray-900 text-gray-200 font-mono text-sm leading-relaxed p-4 whitespace-pre">
+              <span
+                v-for="(token, index) in displayedTokens"
+                :key="index"
+                :class="getColorClass(token.type)"
+              >{{ token.text }}</span><span v-if="showCursor" class="text-gray-200">|</span>
             </div>
           </div>
 
