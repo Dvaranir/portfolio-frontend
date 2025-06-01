@@ -27,7 +27,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <section>
     <section class="relative min-h-svh flex items-center justify-center overflow-hidden">
       <div class="absolute inset-0 bg-gradient-to-br from-green/10 via-transparent to-gray-2" />
 
@@ -51,13 +51,13 @@ onMounted(() => {
           <div class="hero-cta flex flex-col sm:flex-row gap-4 justify-center">
             <NuxtLink
               to="/projects"
-              class="px-8 py-4 bg-green text-white rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:bg-green/90 hover:shadow-lg origin-center"
+              class="h-fit px-8 py-4 border-2 border-green bg-green text-white rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:bg-green/90 hover:shadow-lg origin-center"
             >
               Посмотреть проекты
             </NuxtLink>
             <a
               href="#contacts"
-              class="px-8 py-4 border-2 border-green text-green rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:bg-green hover:text-white origin-center"
+              class="h-fit px-8 py-4 border-2 border-green text-green rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:bg-green hover:text-white origin-center"
             >
               Связаться со мной
             </a>
@@ -80,5 +80,5 @@ onMounted(() => {
     <PagesHomeBigProjects />
 
     <PagesHomeContacts />
-  </div>
+  </section>
 </template>
