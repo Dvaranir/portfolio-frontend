@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-const currentSlide = ref(0)
 const isDesktop = ref(true)
 
 const bigProjects = [
@@ -61,18 +60,6 @@ const bigProjects = [
   },
 ]
 
-const nextSlide = () => {
-  currentSlide.value = (currentSlide.value + 1) % bigProjects.length
-}
-
-const previousSlide = () => {
-  currentSlide.value = currentSlide.value === 0 ? bigProjects.length - 1 : currentSlide.value - 1
-}
-
-const goToSlide = (index: number) => {
-  currentSlide.value = index
-}
-
 onMounted(() => {
   const { $gsap } = useNuxtApp()
 
@@ -112,18 +99,6 @@ onMounted(() => {
   onUnmounted(() => {
     window.removeEventListener('resize', updateScreenSize)
   })
-})
-
-watch(currentSlide, (newSlide) => {
-  if (!isDesktop.value) {
-    const { $gsap } = useNuxtApp()
-
-    $gsap.to('.mobile-slider-container', {
-      x: `${-newSlide * 100}%`,
-      duration: 0.6,
-      ease: 'power2.inOut',
-    })
-  }
 })
 </script>
 
@@ -205,93 +180,73 @@ watch(currentSlide, (newSlide) => {
         </div>
       </div>
 
-      <div v-else class="relative">
-        <div class="overflow-hidden rounded-2xl">
-          <div class="mobile-slider-container flex transition-transform duration-600 ease-in-out">
-            <div
-              v-for="project in bigProjects"
-              :key="project.id"
-              class="w-full flex-shrink-0"
-            >
-              <div class="bg-gray-2 rounded-2xl overflow-hidden shadow-lg mx-2">
-                <div class="relative overflow-hidden">
-                  <img
-                    :src="project.image"
-                    :alt="project.title"
-                    class="w-full h-48 object-cover"
-                  >
-                  <div class="absolute top-4 left-4">
-                    <span v-if="project.featured" class="px-3 py-1 bg-green text-white text-xs font-semibold rounded-full">
-                      Featured
-                    </span>
-                  </div>
+      <div v-else class="mobile-projects-slider">
+        <UiSwiperComponent
+          :items="bigProjects"
+          :autoplay="{ delay: 5000, disableOnInteraction: false }"
+          :pagination="true"
+          :navigation="true"
+          :loop="true"
+          :slides-per-view="1"
+          :space-between="20"
+          container-class="rounded-2xl"
+          class-name="rounded-2xl"
+        >
+          <template #default="{ item }">
+            <div class="bg-gray-2 rounded-2xl overflow-hidden shadow-lg mx-2">
+              <div class="relative overflow-hidden">
+                <img
+                  :src="item.image"
+                  :alt="item.title"
+                  class="w-full h-48 object-cover"
+                >
+                <div class="absolute top-4 left-4">
+                  <span v-if="item.featured" class="px-3 py-1 bg-green text-white text-xs font-semibold rounded-full">
+                    Featured
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-6">
+                <h3 class="text-xl font-bold text-gray-12 mb-3">
+                  {{ item.title }}
+                </h3>
+
+                <p class="text-gray-9 mb-4 leading-relaxed">
+                  {{ item.description }}
+                </p>
+
+                <div class="flex items-center gap-3 mb-4">
+                  <Icon
+                    v-for="tech in item.technologies"
+                    :key="tech"
+                    :name="tech"
+                    class="w-5 h-5 text-gray-8"
+                  />
                 </div>
 
-                <div class="p-6">
-                  <h3 class="text-xl font-bold text-gray-12 mb-3">
-                    {{ project.title }}
-                  </h3>
-
-                  <p class="text-gray-9 mb-4 leading-relaxed">
-                    {{ project.description }}
-                  </p>
-
-                  <div class="flex items-center gap-3 mb-4">
-                    <Icon
-                      v-for="tech in project.technologies"
-                      :key="tech"
-                      :name="tech"
-                      class="w-5 h-5 text-gray-8"
-                    />
-                  </div>
-
-                  <div class="flex gap-3">
-                    <a
-                      :href="project.github"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="flex-1 px-4 py-2 bg-green text-white rounded-lg text-center text-sm font-medium"
-                    >
-                      GitHub
-                    </a>
-                    <a
-                      :href="project.demo"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="flex-1 px-4 py-2 border border-green text-green rounded-lg text-center text-sm font-medium"
-                    >
-                      Demo
-                    </a>
-                  </div>
+                <div class="flex gap-3">
+                  <a
+                    :href="item.github"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex-1 px-4 py-2 bg-green text-white rounded-lg text-center text-sm font-medium"
+                  >
+                    GitHub
+                  </a>
+                  <a
+                    :href="item.demo"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex-1 px-4 py-2 border border-green text-green rounded-lg text-center text-sm font-medium"
+                  >
+                    Demo
+                  </a>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <button
-          class="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-gray-1/80 backdrop-blur-sm border border-gray-4 rounded-full flex items-center justify-center"
-          @click="previousSlide"
-        >
-          <Icon name="mdi:chevron-left" class="w-5 h-5 text-gray-11" />
-        </button>
-
-        <button
-          class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-gray-1/80 backdrop-blur-sm border border-gray-4 rounded-full flex items-center justify-center"
-          @click="nextSlide"
-        >
-          <Icon name="mdi:chevron-right" class="w-5 h-5 text-gray-11" />
-        </button>
-
-        <div class="flex justify-center gap-2 mt-6">
-          <button
-            v-for="(project, index) in bigProjects"
-            :key="index"
-            class="w-2 h-2 rounded-full transition-all duration-300"
-            :class="index === currentSlide ? 'bg-green scale-125' : 'bg-gray-5'"
-            @click="goToSlide(index)"
-          />
-        </div>
+          </template>
+        </UiSwiperComponent>
       </div>
 
       <div class="text-center mt-12">

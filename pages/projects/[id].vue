@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import SwiperComponent from '~/components/ui/swiper-component.vue'
+
 const route = useRoute()
 const projectId = route.params.id
 
@@ -73,13 +75,23 @@ const project = ref({
   created_at: '2024-12-01',
 })
 
-const currentSlide = ref(0)
-const linkedProjectsSlide = ref(0)
 const allSlides = computed(() => {
-  const slides = [...project.value.images]
+  const slides = project.value.images.map((image, index) => ({
+    id: `image-${index}`,
+    type: 'image',
+    src: image,
+    alt: `${project.value.title} - Изображение ${index + 1}`,
+  }))
+
   if (project.value.youtube) {
-    slides.push(project.value.youtube)
+    slides.push({
+      id: 'youtube',
+      type: 'youtube',
+      src: project.value.youtube,
+      alt: `${project.value.title} - Видео`,
+    })
   }
+
   return slides
 })
 
@@ -88,28 +100,6 @@ const breadcrumbs = computed(() => [
   { name: 'Проекты', href: '/projects' },
   { name: project.value.title, href: `/projects/${project.value.id}` },
 ])
-
-const nextSlide = () => {
-  currentSlide.value = (currentSlide.value + 1) % allSlides.value.length
-}
-
-const previousSlide = () => {
-  currentSlide.value = currentSlide.value === 0 ? allSlides.value.length - 1 : currentSlide.value - 1
-}
-
-const goToSlide = (index: number) => {
-  currentSlide.value = index
-}
-
-const nextLinkedProject = () => {
-  linkedProjectsSlide.value = (linkedProjectsSlide.value + 1) % project.value.linked_projects.length
-}
-
-const previousLinkedProject = () => {
-  linkedProjectsSlide.value = linkedProjectsSlide.value === 0 ? project.value.linked_projects.length - 1 : linkedProjectsSlide.value - 1
-}
-
-const isYouTubeSlide = (slide: string) => slide.includes('youtube.com') || slide.includes('youtu.be')
 
 onMounted(() => {
   const { $gsap } = useNuxtApp()
@@ -120,10 +110,6 @@ onMounted(() => {
   )
     .fromTo('.project-slider', { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: 'back.out(1.7)' }, '-=0.4')
     .fromTo('.project-info', { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 }, '-=0.4')
-
-  setInterval(() => {
-    nextSlide()
-  }, 6000)
 
   for (const section of $gsap.utils.toArray('.section-fade') as Element[]) {
     $gsap.fromTo(section, { y: 60, opacity: 0 }, {
@@ -138,26 +124,6 @@ onMounted(() => {
       },
     })
   }
-})
-
-watch(currentSlide, (newSlide) => {
-  const { $gsap } = useNuxtApp()
-
-  $gsap.to('.main-slider-container', {
-    x: `${-newSlide * 100}%`,
-    duration: 0.8,
-    ease: 'power2.inOut',
-  })
-})
-
-watch(linkedProjectsSlide, (newSlide) => {
-  const { $gsap } = useNuxtApp()
-
-  $gsap.to('.linked-slider-container', {
-    x: `${-newSlide * 100}%`,
-    duration: 0.6,
-    ease: 'power2.inOut',
-  })
 })
 
 useHead({
@@ -208,58 +174,38 @@ useHead({
               </span>
             </div>
 
-            <div class="overflow-hidden">
-              <div class="main-slider-container flex transition-transform duration-800 ease-in-out">
-                <div
-                  v-for="(slide, index) in allSlides"
-                  :key="index"
-                  class="w-full flex-shrink-0"
-                >
-                  <div v-if="isYouTubeSlide(slide)" class="relative w-full h-96 lg:h-[600px] bg-black">
-                    <iframe
-                      :src="slide"
-                      class="w-full h-full"
-                      frameborder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowfullscreen
-                    />
-                  </div>
-
-                  <div v-else class="relative">
-                    <img
-                      :src="slide"
-                      :alt="`${project.title} - Изображение ${index + 1}`"
-                      class="w-full h-96 lg:h-[600px] object-cover"
-                    >
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                  </div>
+            <SwiperComponent
+              :items="allSlides"
+              :autoplay="{ delay: 6000, disableOnInteraction: false }"
+              :pagination="true"
+              :navigation="true"
+              :loop="true"
+              :slides-per-view="1"
+              :space-between="0"
+              container-class="project-media-swiper"
+              class-name="h-96 lg:h-[600px]"
+            >
+              <template #default="{ item }">
+                <div v-if="item.type === 'youtube'" class="relative w-full h-96 lg:h-[600px] bg-black">
+                  <iframe
+                    :src="item.src"
+                    class="w-full h-full"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                  />
                 </div>
-              </div>
-            </div>
 
-            <button
-              class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 group"
-              @click="previousSlide"
-            >
-              <Icon name="mdi:chevron-left" class="w-6 h-6 text-white group-hover:text-white" />
-            </button>
-
-            <button
-              class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 group"
-              @click="nextSlide"
-            >
-              <Icon name="mdi:chevron-right" class="w-6 h-6 text-white group-hover:text-white" />
-            </button>
-
-            <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-              <button
-                v-for="(slide, index) in allSlides"
-                :key="index"
-                class="w-3 h-3 rounded-full transition-all duration-300 backdrop-blur-sm"
-                :class="index === currentSlide ? 'bg-white scale-110' : 'bg-white/50 hover:bg-white/70'"
-                @click="goToSlide(index)"
-              />
-            </div>
+                <div v-else class="relative">
+                  <img
+                    :src="item.src"
+                    :alt="item.alt"
+                    class="w-full h-96 lg:h-[600px] object-cover"
+                  >
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                </div>
+              </template>
+            </SwiperComponent>
           </div>
         </div>
       </div>
@@ -349,70 +295,58 @@ useHead({
             Связанные проекты
           </h2>
 
-          <div class="relative">
-            <div class="overflow-hidden rounded-2xl">
-              <div class="linked-slider-container flex transition-transform duration-600 ease-in-out">
-                <div
-                  v-for="linkedProject in project.linked_projects"
-                  :key="linkedProject.id"
-                  class="w-full flex-shrink-0"
-                >
-                  <div class="bg-gray-2 rounded-2xl overflow-hidden shadow-lg mx-4">
-                    <div class="grid md:grid-cols-2 gap-0">
-                      <div class="relative overflow-hidden">
-                        <img
-                          :src="linkedProject.images[0]"
-                          :alt="linkedProject.title"
-                          class="w-full h-64 md:h-80 object-cover hover:scale-110 transition-transform duration-500"
-                        >
-                      </div>
+          <SwiperComponent
+            :items="project.linked_projects"
+            :autoplay="false"
+            :pagination="true"
+            :navigation="true"
+            :loop="true"
+            :slides-per-view="1"
+            :space-between="20"
+            container-class="rounded-2xl"
+            class-name="rounded-2xl"
+          >
+            <template #default="{ item }">
+              <div class="bg-gray-2 rounded-2xl overflow-hidden shadow-lg mx-4">
+                <div class="grid md:grid-cols-2 gap-0">
+                  <div class="relative overflow-hidden">
+                    <img
+                      :src="item.images[0]"
+                      :alt="item.title"
+                      class="w-full h-64 md:h-80 object-cover hover:scale-110 transition-transform duration-500"
+                    >
+                  </div>
 
-                      <div class="p-8 flex flex-col justify-center">
-                        <h3 class="text-2xl font-bold text-gray-12 mb-4">
-                          {{ linkedProject.title }}
-                        </h3>
+                  <div class="p-8 flex flex-col justify-center">
+                    <h3 class="text-2xl font-bold text-gray-12 mb-4">
+                      {{ item.title }}
+                    </h3>
 
-                        <p class="text-gray-9 mb-6 leading-relaxed">
-                          {{ linkedProject.small_description }}
-                        </p>
+                    <p class="text-gray-9 mb-6 leading-relaxed">
+                      {{ item.small_description }}
+                    </p>
 
-                        <div class="flex items-center gap-3 mb-6">
-                          <Icon
-                            v-for="tech in linkedProject.technologies"
-                            :key="tech.name"
-                            :name="tech.icon"
-                            class="w-6 h-6 text-gray-8 hover:text-green transition-colors duration-300"
-                          />
-                        </div>
-
-                        <NuxtLink
-                          :to="`/projects/${linkedProject.id}`"
-                          class="inline-flex items-center gap-2 px-6 py-3 bg-green text-white rounded-lg hover:bg-green/90 transition-all duration-300 hover:scale-105 w-fit"
-                        >
-                          Подробнее
-                          <Icon name="mdi:arrow-right" class="w-4 h-4" />
-                        </NuxtLink>
-                      </div>
+                    <div class="flex items-center gap-3 mb-6">
+                      <Icon
+                        v-for="tech in item.technologies"
+                        :key="tech.name"
+                        :name="tech.icon"
+                        class="w-6 h-6 text-gray-8 hover:text-green transition-colors duration-300"
+                      />
                     </div>
+
+                    <NuxtLink
+                      :to="`/projects/${item.id}`"
+                      class="inline-flex items-center gap-2 px-6 py-3 bg-green text-white rounded-lg hover:bg-green/90 transition-all duration-300 hover:scale-105 w-fit"
+                    >
+                      Подробнее
+                      <Icon name="mdi:arrow-right" class="w-4 h-4" />
+                    </NuxtLink>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <button
-              class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-gray-1/80 backdrop-blur-sm border border-gray-4 rounded-full flex items-center justify-center hover:bg-green hover:border-green hover:text-white transition-all duration-300 group"
-              @click="previousLinkedProject"
-            >
-              <Icon name="mdi:chevron-left" class="w-6 h-6 text-gray-11 group-hover:text-white" />
-            </button>
-
-            <button
-              class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-gray-1/80 backdrop-blur-sm border border-gray-4 rounded-full flex items-center justify-center hover:bg-green hover:border-green hover:text-white transition-all duration-300 group"
-              @click="nextLinkedProject"
-            >
-              <Icon name="mdi:chevron-right" class="w-6 h-6 text-gray-11 group-hover:text-white" />
-            </button>
-          </div>
+            </template>
+          </SwiperComponent>
         </div>
       </div>
     </section>
