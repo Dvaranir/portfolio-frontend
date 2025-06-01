@@ -76,7 +76,6 @@ const goToSlide = (index: number) => {
 onMounted(() => {
   const { $gsap } = useNuxtApp()
 
-  // Определяем размер экрана
   const updateScreenSize = () => {
     isDesktop.value = window.innerWidth >= 1024
   }
@@ -84,7 +83,6 @@ onMounted(() => {
   updateScreenSize()
   window.addEventListener('resize', updateScreenSize)
 
-  // Анимация появления секции
   $gsap.fromTo('.big-projects-section', { y: 80, opacity: 0 }, {
     y: 0,
     opacity: 1,
@@ -97,7 +95,6 @@ onMounted(() => {
     },
   })
 
-  // Анимация карточек в сетке
   $gsap.fromTo('.project-card', { y: 50, opacity: 0, scale: 0.9 }, {
     y: 0,
     opacity: 1,
@@ -133,7 +130,6 @@ watch(currentSlide, (newSlide) => {
 <template>
   <section class="big-projects-section py-20 lg:py-32">
     <div class="container mx-auto px-4">
-      <!-- Заголовок -->
       <div class="text-center mb-16">
         <h2 class="text-4xl lg:text-5xl font-bold text-gray-12 mb-6">
           Большие проекты
@@ -144,7 +140,6 @@ watch(currentSlide, (newSlide) => {
         </p>
       </div>
 
-      <!-- Desktop Grid -->
       <div v-if="isDesktop" class="projects-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
         <div
           v-for="(project, index) in bigProjects"
@@ -153,7 +148,6 @@ watch(currentSlide, (newSlide) => {
           :class="{ 'lg:col-span-2': project.featured && index < 2 }"
         >
           <div class="bg-gray-2 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-            <!-- Изображение -->
             <div class="relative overflow-hidden">
               <img
                 :src="project.image"
@@ -163,14 +157,12 @@ watch(currentSlide, (newSlide) => {
               >
               <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-              <!-- Badges -->
               <div class="absolute top-4 left-4">
                 <span v-if="project.featured" class="px-3 py-1 bg-green text-white text-xs font-semibold rounded-full">
                   Featured
                 </span>
               </div>
 
-              <!-- Hover buttons -->
               <div class="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <a
                   :href="project.github"
@@ -191,7 +183,6 @@ watch(currentSlide, (newSlide) => {
               </div>
             </div>
 
-            <!-- Контент -->
             <div class="p-6">
               <h3 class="text-xl font-bold text-gray-12 mb-3 group-hover:text-green transition-colors duration-300">
                 {{ project.title }}
@@ -201,7 +192,6 @@ watch(currentSlide, (newSlide) => {
                 {{ project.description }}
               </p>
 
-              <!-- Технологии -->
               <div class="flex items-center gap-3">
                 <Icon
                   v-for="tech in project.technologies"
@@ -215,7 +205,6 @@ watch(currentSlide, (newSlide) => {
         </div>
       </div>
 
-      <!-- Mobile Slider -->
       <div v-else class="relative">
         <div class="overflow-hidden rounded-2xl">
           <div class="mobile-slider-container flex transition-transform duration-600 ease-in-out">
@@ -225,7 +214,6 @@ watch(currentSlide, (newSlide) => {
               class="w-full flex-shrink-0"
             >
               <div class="bg-gray-2 rounded-2xl overflow-hidden shadow-lg mx-2">
-                <!-- Изображение -->
                 <div class="relative overflow-hidden">
                   <img
                     :src="project.image"
@@ -239,7 +227,6 @@ watch(currentSlide, (newSlide) => {
                   </div>
                 </div>
 
-                <!-- Контент -->
                 <div class="p-6">
                   <h3 class="text-xl font-bold text-gray-12 mb-3">
                     {{ project.title }}
@@ -249,7 +236,6 @@ watch(currentSlide, (newSlide) => {
                     {{ project.description }}
                   </p>
 
-                  <!-- Технологии -->
                   <div class="flex items-center gap-3 mb-4">
                     <Icon
                       v-for="tech in project.technologies"
@@ -259,7 +245,6 @@ watch(currentSlide, (newSlide) => {
                     />
                   </div>
 
-                  <!-- Кнопки -->
                   <div class="flex gap-3">
                     <a
                       :href="project.github"
@@ -284,7 +269,6 @@ watch(currentSlide, (newSlide) => {
           </div>
         </div>
 
-        <!-- Mobile Navigation -->
         <button
           class="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-gray-1/80 backdrop-blur-sm border border-gray-4 rounded-full flex items-center justify-center"
           @click="previousSlide"
@@ -299,7 +283,6 @@ watch(currentSlide, (newSlide) => {
           <Icon name="mdi:chevron-right" class="w-5 h-5 text-gray-11" />
         </button>
 
-        <!-- Mobile Indicators -->
         <div class="flex justify-center gap-2 mt-6">
           <button
             v-for="(project, index) in bigProjects"
@@ -311,7 +294,6 @@ watch(currentSlide, (newSlide) => {
         </div>
       </div>
 
-      <!-- Кнопка "Посмотреть все" -->
       <div class="text-center mt-12">
         <NuxtLink
           to="/projects?size=big"

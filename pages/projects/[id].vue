@@ -2,7 +2,6 @@
 const route = useRoute()
 const projectId = route.params.id
 
-// Mock project data - заменить на реальные данные из API
 const project = ref({
   id: Number(projectId),
   title: 'E-Commerce Platform',
@@ -115,7 +114,6 @@ const isYouTubeSlide = (slide: string) => slide.includes('youtube.com') || slide
 onMounted(() => {
   const { $gsap } = useNuxtApp()
 
-  // Анимация появления страницы
   const tl = $gsap.timeline()
 
   tl.fromTo('.breadcrumbs', { y: -30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' },
@@ -123,12 +121,10 @@ onMounted(() => {
     .fromTo('.project-slider', { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: 'back.out(1.7)' }, '-=0.4')
     .fromTo('.project-info', { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 }, '-=0.4')
 
-  // Автопрокрутка слайдера
   setInterval(() => {
     nextSlide()
   }, 6000)
 
-  // Анимация секций при скролле
   for (const section of $gsap.utils.toArray('.section-fade') as Element[]) {
     $gsap.fromTo(section, { y: 60, opacity: 0 }, {
       y: 0,
@@ -164,7 +160,6 @@ watch(linkedProjectsSlide, (newSlide) => {
   })
 })
 
-// SEO
 useHead({
   title: `${project.value.title} - DevPortfolio`,
   meta: [
@@ -175,7 +170,6 @@ useHead({
 
 <template>
   <div class="min-h-screen bg-gray-1">
-    <!-- Breadcrumbs -->
     <section class="breadcrumbs py-6 bg-gray-2 border-b border-gray-4">
       <div class="container mx-auto px-4">
         <nav>
@@ -201,12 +195,10 @@ useHead({
       </div>
     </section>
 
-    <!-- Main Slider -->
     <section class="project-slider py-12">
       <div class="container mx-auto px-4">
         <div class="max-w-6xl mx-auto">
           <div class="relative rounded-2xl overflow-hidden shadow-2xl">
-            <!-- Size Badge -->
             <div class="absolute top-6 left-6 z-10">
               <span
                 :class="project.project_size === 'big' ? 'bg-green' : 'bg-blue-500'"
@@ -216,7 +208,6 @@ useHead({
               </span>
             </div>
 
-            <!-- Slider Container -->
             <div class="overflow-hidden">
               <div class="main-slider-container flex transition-transform duration-800 ease-in-out">
                 <div
@@ -224,7 +215,6 @@ useHead({
                   :key="index"
                   class="w-full flex-shrink-0"
                 >
-                  <!-- YouTube Embed -->
                   <div v-if="isYouTubeSlide(slide)" class="relative w-full h-96 lg:h-[600px] bg-black">
                     <iframe
                       :src="slide"
@@ -235,7 +225,6 @@ useHead({
                     />
                   </div>
 
-                  <!-- Image -->
                   <div v-else class="relative">
                     <img
                       :src="slide"
@@ -248,7 +237,6 @@ useHead({
               </div>
             </div>
 
-            <!-- Navigation -->
             <button
               class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 group"
               @click="previousSlide"
@@ -263,7 +251,6 @@ useHead({
               <Icon name="mdi:chevron-right" class="w-6 h-6 text-white group-hover:text-white" />
             </button>
 
-            <!-- Indicators -->
             <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
               <button
                 v-for="(slide, index) in allSlides"
@@ -278,11 +265,9 @@ useHead({
       </div>
     </section>
 
-    <!-- Project Info -->
     <section class="py-12">
       <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
-          <!-- Technologies -->
           <div class="project-info flex justify-center gap-4 mb-8">
             <div
               v-for="tech in project.technologies"
@@ -294,12 +279,10 @@ useHead({
             </div>
           </div>
 
-          <!-- Title -->
           <h1 class="project-info text-4xl lg:text-5xl font-bold text-gray-12 text-center mb-6">
             {{ project.title }}
           </h1>
 
-          <!-- Action Buttons -->
           <div class="project-info flex justify-center gap-4 mb-12">
             <a
               v-if="project.github"
@@ -323,7 +306,6 @@ useHead({
             </a>
           </div>
 
-          <!-- Description -->
           <div class="project-info prose prose-lg max-w-none">
             <div
               class="text-gray-9 leading-relaxed [&>ul]:list-disc [&>ul]:ml-6 [&>ul]:space-y-2 [&>p]:mb-4"
@@ -334,7 +316,6 @@ useHead({
       </div>
     </section>
 
-    <!-- Tasks Section -->
     <section v-if="project.tasks && project.tasks.length > 0" class="section-fade py-12 bg-gray-2">
       <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
@@ -361,7 +342,6 @@ useHead({
       </div>
     </section>
 
-    <!-- Linked Projects -->
     <section v-if="project.linked_projects && project.linked_projects.length > 0" class="section-fade py-12">
       <div class="container mx-auto px-4">
         <div class="max-w-6xl mx-auto">
@@ -379,7 +359,6 @@ useHead({
                 >
                   <div class="bg-gray-2 rounded-2xl overflow-hidden shadow-lg mx-4">
                     <div class="grid md:grid-cols-2 gap-0">
-                      <!-- Image -->
                       <div class="relative overflow-hidden">
                         <img
                           :src="linkedProject.images[0]"
@@ -388,7 +367,6 @@ useHead({
                         >
                       </div>
 
-                      <!-- Content -->
                       <div class="p-8 flex flex-col justify-center">
                         <h3 class="text-2xl font-bold text-gray-12 mb-4">
                           {{ linkedProject.title }}
@@ -398,7 +376,6 @@ useHead({
                           {{ linkedProject.small_description }}
                         </p>
 
-                        <!-- Technologies -->
                         <div class="flex items-center gap-3 mb-6">
                           <Icon
                             v-for="tech in linkedProject.technologies"
@@ -408,7 +385,6 @@ useHead({
                           />
                         </div>
 
-                        <!-- Button -->
                         <NuxtLink
                           :to="`/projects/${linkedProject.id}`"
                           class="inline-flex items-center gap-2 px-6 py-3 bg-green text-white rounded-lg hover:bg-green/90 transition-all duration-300 hover:scale-105 w-fit"
@@ -423,7 +399,6 @@ useHead({
               </div>
             </div>
 
-            <!-- Navigation -->
             <button
               class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-gray-1/80 backdrop-blur-sm border border-gray-4 rounded-full flex items-center justify-center hover:bg-green hover:border-green hover:text-white transition-all duration-300 group"
               @click="previousLinkedProject"

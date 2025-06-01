@@ -37,7 +37,6 @@ const contactLinks = [
 onMounted(() => {
   const { $gsap } = useNuxtApp()
 
-  // Анимация появления секции
   const tl = $gsap.timeline({
     scrollTrigger: {
       trigger: '.contacts-section',
@@ -51,7 +50,6 @@ onMounted(() => {
     .fromTo('.contacts-description', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, '-=0.4')
     .fromTo('.contact-card', { y: 50, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.1, ease: 'back.out(1.7)' }, '-=0.3')
 
-  // Анимация парящих элементов
   $gsap.to('.floating-contact-element', {
     y: -15,
     duration: 3,
@@ -66,7 +64,6 @@ onMounted(() => {
 <template>
   <section id="contacts" class="contacts-section py-20 lg:py-32 bg-gray-2 relative overflow-hidden">
     <div class="container mx-auto px-4">
-      <!-- Заголовок -->
       <div class="text-center mb-16">
         <h2 class="contacts-title text-4xl lg:text-5xl font-bold text-gray-12 mb-6">
           Давайте создадим что-то крутое вместе
@@ -77,7 +74,6 @@ onMounted(() => {
         </p>
       </div>
 
-      <!-- Карточки контактов -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
         <a
           v-for="contact in contactLinks"
@@ -88,7 +84,6 @@ onMounted(() => {
           class="contact-card group block"
         >
           <div class="bg-gray-1 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-4 hover:border-green/50">
-            <!-- Иконка -->
             <div class="relative mb-6">
               <div
                 class="w-16 h-16 rounded-2xl bg-gradient-to-br flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
@@ -101,7 +96,6 @@ onMounted(() => {
               </div>
             </div>
 
-            <!-- Контент -->
             <h3 class="text-xl font-bold text-gray-12 mb-2 group-hover:text-green transition-colors duration-300">
               {{ contact.name }}
             </h3>
@@ -117,7 +111,6 @@ onMounted(() => {
         </a>
       </div>
 
-      <!-- CTA -->
       <div class="text-center">
         <div class="inline-block bg-gray-1 rounded-2xl p-8 shadow-lg border border-gray-4">
           <h3 class="text-2xl font-bold text-gray-12 mb-4">
@@ -137,7 +130,6 @@ onMounted(() => {
       </div>
     </div>
 
-    <!-- Декоративные элементы -->
     <div class="absolute top-20 left-10 floating-contact-element">
       <div class="w-4 h-4 bg-green/30 rounded-full" />
     </div>

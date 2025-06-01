@@ -39,7 +39,6 @@ onMounted(() => {
   <footer class="footer bg-gray-3 border-t border-gray-4">
     <div class="container mx-auto px-4 py-12">
       <div class="footer-content grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-        <!-- Логотип и описание -->
         <div class="space-y-4">
           <div class="flex items-center space-x-3">
             <img
@@ -71,7 +70,6 @@ onMounted(() => {
           </div>
         </div>
 
-        <!-- Навигация -->
         <div class="space-y-4">
           <h3 class="font-semibold text-gray-12">
             Навигация
@@ -88,7 +86,6 @@ onMounted(() => {
           </nav>
         </div>
 
-        <!-- Контактная информация -->
         <div class="space-y-4">
           <h3 class="font-semibold text-gray-12">
             Контакты
@@ -115,7 +112,6 @@ onMounted(() => {
         </div>
       </div>
 
-      <!-- Разделитель -->
       <div class="border-t border-gray-5 pt-8">
         <div class="flex flex-col md:flex-row justify-between items-center gap-4">
           <p class="text-gray-8 text-sm">

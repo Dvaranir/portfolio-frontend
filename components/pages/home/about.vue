@@ -15,7 +15,6 @@ onMounted(() => {
     .fromTo('.about-text', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 }, '-=0.4')
     .fromTo('.code-animation', { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 1, ease: 'back.out(1.7)' }, '-=0.6')
 
-  // Анимация печатания кода
   const codeLines = [
     'const developer = {',
     '  name: "FullStack Dev",',
@@ -51,7 +50,6 @@ onMounted(() => {
 
   setTimeout(typeCode, 1000)
 
-  // Анимация парящих элементов
   $gsap.to('.floating-icon', {
     y: -20,
     duration: 2,
@@ -67,7 +65,6 @@ onMounted(() => {
   <section class="about-section section-fade py-20 lg:py-32 relative overflow-hidden">
     <div class="container mx-auto px-4">
       <div class="grid lg:grid-cols-2 gap-16 items-center">
-        <!-- Текстовый контент -->
         <div class="space-y-8">
           <h2 class="about-title text-4xl lg:text-5xl font-bold text-gray-12">
             Обо мне
@@ -90,7 +87,6 @@ onMounted(() => {
             </p>
           </div>
 
-          <!-- Технологии -->
           <div class="about-text">
             <h3 class="text-xl font-semibold text-gray-11 mb-4">
               Основные технологии:
@@ -107,10 +103,8 @@ onMounted(() => {
           </div>
         </div>
 
-        <!-- Анимация кода -->
         <div class="code-animation relative">
           <div class="bg-gray-2 border border-gray-4 rounded-2xl p-6 shadow-2xl">
-            <!-- Заголовок терминала -->
             <div class="flex items-center gap-2 mb-4 pb-4 border-b border-gray-4">
               <div class="w-3 h-3 bg-red-500 rounded-full" />
               <div class="w-3 h-3 bg-yellow-500 rounded-full" />
@@ -118,7 +112,6 @@ onMounted(() => {
               <span class="ml-4 text-sm text-gray-8 font-mono">developer.js</span>
             </div>
 
-            <!-- Код -->
             <div class="typing-code space-y-1 min-h-[150px]">
               <div class="flex items-center">
                 <span class="text-gray-6 font-mono text-sm mr-2">1</span>
@@ -127,7 +120,6 @@ onMounted(() => {
             </div>
           </div>
 
-          <!-- Парящие иконки технологий -->
           <div class="absolute -top-4 -right-4 floating-icon">
             <div class="w-12 h-12 bg-gradient-to-br from-green to-green/80 rounded-lg flex items-center justify-center shadow-lg">
               <Icon name="mdi:vuejs" class="w-6 h-6 text-white" />
@@ -149,7 +141,6 @@ onMounted(() => {
       </div>
     </div>
 
-    <!-- Декоративные элементы -->
     <div class="absolute top-20 left-10 w-2 h-2 bg-green/40 rounded-full animate-pulse" />
     <div class="absolute bottom-20 right-20 w-3 h-3 bg-green/30 rounded-full animate-pulse" style="animation-delay: 1s;" />
   </section>

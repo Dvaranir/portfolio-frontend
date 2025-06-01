@@ -28,7 +28,6 @@ onMounted(() => {
 
 <template>
   <div>
-    <!-- Hero Section -->
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div class="absolute inset-0 bg-gradient-to-br from-green/10 via-transparent to-gray-2" />
 
@@ -66,7 +65,6 @@ onMounted(() => {
         </div>
       </div>
 
-      <!-- Animated Background Elements -->
       <div class="absolute inset-0 pointer-events-none">
         <div class="floating-element absolute top-20 left-10 w-4 h-4 bg-green/30 rounded-full" />
         <div class="floating-element absolute top-40 right-20 w-6 h-6 bg-green/20 rounded-full" />
@@ -75,16 +73,12 @@ onMounted(() => {
       </div>
     </section>
 
-    <!-- About Section -->
     <PagesHomeAbout />
 
-    <!-- Small Projects Section -->
     <PagesHomeSmallProjects />
 
-    <!-- Big Projects Section -->
     <PagesHomeBigProjects />
 
-    <!-- Contacts Section -->
     <PagesHomeContacts />
   </div>
 </template>

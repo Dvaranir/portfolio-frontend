@@ -67,7 +67,6 @@ const goToSlide = (index: number) => {
 onMounted(() => {
   const { $gsap } = useNuxtApp()
 
-  // Анимация появления секции
   $gsap.fromTo('.small-projects-section', { y: 80, opacity: 0 }, {
     y: 0,
     opacity: 1,
@@ -80,7 +79,6 @@ onMounted(() => {
     },
   })
 
-  // Автопрокрутка слайдера
   setInterval(() => {
     nextSlide()
   }, 5000)
@@ -100,7 +98,6 @@ watch(currentSlide, (newSlide) => {
 <template>
   <section class="small-projects-section py-20 lg:py-32 bg-gray-2">
     <div class="container mx-auto px-4">
-      <!-- Заголовок -->
       <div class="text-center mb-16">
         <h2 class="text-4xl lg:text-5xl font-bold text-gray-12 mb-6">
           Маленькие проекты
@@ -110,9 +107,7 @@ watch(currentSlide, (newSlide) => {
         </p>
       </div>
 
-      <!-- Слайдер -->
       <div class="relative max-w-6xl mx-auto">
-        <!-- Контейнер слайдов -->
         <div class="overflow-hidden rounded-2xl">
           <div class="slider-container flex transition-transform duration-600 ease-in-out">
             <div
@@ -122,7 +117,6 @@ watch(currentSlide, (newSlide) => {
             >
               <div class="bg-gray-1 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
                 <div class="grid md:grid-cols-2 gap-0">
-                  <!-- Изображение -->
                   <div class="relative overflow-hidden">
                     <img
                       :src="project.image"
@@ -132,7 +126,6 @@ watch(currentSlide, (newSlide) => {
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
 
-                  <!-- Контент -->
                   <div class="p-8 flex flex-col justify-center">
                     <h3 class="text-2xl font-bold text-gray-12 mb-4">
                       {{ project.title }}
@@ -142,7 +135,6 @@ watch(currentSlide, (newSlide) => {
                       {{ project.description }}
                     </p>
 
-                    <!-- Технологии -->
                     <div class="flex items-center gap-3 mb-6">
                       <Icon
                         v-for="tech in project.technologies"
@@ -152,7 +144,6 @@ watch(currentSlide, (newSlide) => {
                       />
                     </div>
 
-                    <!-- Кнопки -->
                     <div class="flex gap-4">
                       <a
                         :href="project.github"
@@ -174,7 +165,6 @@ watch(currentSlide, (newSlide) => {
           </div>
         </div>
 
-        <!-- Навигация -->
         <button
           class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-gray-1/80 backdrop-blur-sm border border-gray-4 rounded-full flex items-center justify-center hover:bg-green hover:border-green hover:text-white transition-all duration-300 group"
           @click="previousSlide"
@@ -189,7 +179,6 @@ watch(currentSlide, (newSlide) => {
           <Icon name="mdi:chevron-right" class="w-6 h-6 text-gray-11 group-hover:text-white" />
         </button>
 
-        <!-- Индикаторы -->
         <div class="flex justify-center gap-2 mt-8">
           <button
             v-for="(project, index) in smallProjects"
@@ -201,7 +190,6 @@ watch(currentSlide, (newSlide) => {
         </div>
       </div>
 
-      <!-- Кнопка "Посмотреть все" -->
       <div class="text-center mt-12">
         <NuxtLink
           to="/projects?size=small"

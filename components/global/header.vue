@@ -56,7 +56,6 @@ watch(isMenuOpen, (newValue) => {
 <template>
   <header class="fixed top-0 left-0 right-0 z-50 bg-gray-1/80 backdrop-blur-md border-b border-gray-4">
     <div class="container mx-auto px-4 h-16 flex items-center justify-between">
-      <!-- Logo -->
       <NuxtLink to="/" class="header-logo flex items-center space-x-3 group">
         <div class="relative">
           <img
@@ -69,7 +68,6 @@ watch(isMenuOpen, (newValue) => {
         <span class="font-bold text-lg text-gray-12 hidden sm:block">DevPortfolio</span>
       </NuxtLink>
 
-      <!-- Desktop Navigation -->
       <nav class="hidden lg:flex items-center space-x-8">
         <NuxtLink
           v-for="item in navItems"
@@ -82,9 +80,7 @@ watch(isMenuOpen, (newValue) => {
         </NuxtLink>
       </nav>
 
-      <!-- Theme Toggle & Social Links -->
       <div class="flex items-center space-x-4">
-        <!-- Theme Toggle -->
         <button
           class="w-10 h-10 rounded-full bg-gray-3 hover:bg-gray-4 flex items-center justify-center transition-all duration-300 hover:scale-110"
           :title="coreStore.isThemeDark ? 'Светлая тема' : 'Тёмная тема'"
@@ -97,7 +93,6 @@ watch(isMenuOpen, (newValue) => {
           />
         </button>
 
-        <!-- Social Links (Desktop) -->
         <div class="hidden md:flex items-center space-x-2">
           <a
             v-for="social in socialLinks"
@@ -115,7 +110,6 @@ watch(isMenuOpen, (newValue) => {
           </a>
         </div>
 
-        <!-- Mobile Menu Button -->
         <button
           class="lg:hidden w-10 h-10 rounded-lg bg-gray-3 hover:bg-gray-4 flex items-center justify-center transition-all duration-300"
           @click="toggleMenu"
@@ -129,12 +123,10 @@ watch(isMenuOpen, (newValue) => {
       </div>
     </div>
 
-    <!-- Mobile Menu -->
     <div
       class="mobile-menu fixed top-16 right-0 w-80 h-[calc(100vh-4rem)] bg-gray-1 border-l border-gray-4 transform translate-x-full lg:hidden"
     >
       <div class="p-6 space-y-6">
-        <!-- Mobile Navigation -->
         <nav class="space-y-4">
           <NuxtLink
             v-for="item in navItems"
@@ -147,7 +139,6 @@ watch(isMenuOpen, (newValue) => {
           </NuxtLink>
         </nav>
 
-        <!-- Mobile Social Links -->
         <div class="pt-6 border-t border-gray-4">
           <h3 class="text-sm font-semibold text-gray-8 mb-4">
             Социальные сети
@@ -172,7 +163,6 @@ watch(isMenuOpen, (newValue) => {
       </div>
     </div>
 
-    <!-- Mobile Menu Overlay -->
     <div
       v-if="isMenuOpen"
       class="fixed inset-0 bg-black/20 backdrop-blur-sm lg:hidden z-[-1]"

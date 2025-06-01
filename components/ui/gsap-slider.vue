@@ -169,7 +169,6 @@ onUnmounted(() => {
   stopAutoplay()
 })
 
-// Expose methods for parent component
 defineExpose({
   nextSlide,
   previousSlide,
@@ -185,7 +184,6 @@ defineExpose({
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
   >
-    <!-- Slider Container -->
     <div class="overflow-hidden rounded-lg">
       <div
         ref="sliderContainer"
@@ -205,7 +203,6 @@ defineExpose({
           @click="onItemClick(item, index)"
         >
           <slot :item="item" :index="index" :is-active="index === currentSlide">
-            <!-- Default slot content -->
             <div class="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center">
               <span class="text-gray-500">Slide {{ index + 1 }}</span>
             </div>
@@ -214,7 +211,6 @@ defineExpose({
       </div>
     </div>
 
-    <!-- Navigation Arrows -->
     <template v-if="showArrows && totalSlides > itemsPerView">
       <button
         v-if="canGoPrevious"
@@ -235,7 +231,6 @@ defineExpose({
       </button>
     </template>
 
-    <!-- Dots Navigation -->
     <div
       v-if="showDots && totalSlides > itemsPerView"
       class="flex justify-center gap-2 mt-6"
@@ -250,7 +245,6 @@ defineExpose({
       />
     </div>
 
-    <!-- Loading State -->
     <div v-if="isTransitioning" class="absolute inset-0 flex items-center justify-center bg-black/10 rounded-lg z-20">
       <div class="w-8 h-8 border-2 border-green border-t-transparent rounded-full animate-spin" />
     </div>

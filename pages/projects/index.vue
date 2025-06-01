@@ -2,7 +2,6 @@
 const route = useRoute()
 const router = useRouter()
 
-// Reactive state
 const currentPage = ref(1)
 const projectsPerPage = 9
 const searchQuery = ref('')
@@ -10,7 +9,6 @@ const selectedSize = ref(route.query.size as string || 'all')
 const selectedSort = ref('newest')
 const selectedTechnologies = ref<string[]>([])
 
-// Mock data - заменить на реальные данные из API
 const allProjects = ref([
   {
     id: 1,
@@ -44,7 +42,6 @@ const allProjects = ref([
     demo: 'https://demo.com',
     created_at: '2024-10-20',
   },
-  // Добавить больше проектов...
 ])
 
 const availableTechnologies = [
@@ -58,16 +55,13 @@ const availableTechnologies = [
   { name: 'Telegram', icon: 'mdi:telegram', value: 'telegram' },
 ]
 
-// Computed
 const filteredProjects = computed(() => {
   let projects = allProjects.value
 
-  // Фильтр по размеру
   if (selectedSize.value !== 'all') {
     projects = projects.filter(p => p.project_size === selectedSize.value)
   }
 
-  // Поиск
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase()
     projects = projects.filter(p =>
@@ -76,7 +70,6 @@ const filteredProjects = computed(() => {
     )
   }
 
-  // Фильтр по технологиям
   if (selectedTechnologies.value.length > 0) {
     projects = projects.filter(p =>
       selectedTechnologies.value.some(tech =>
@@ -85,7 +78,6 @@ const filteredProjects = computed(() => {
     )
   }
 
-  // Сортировка
   if (selectedSort.value === 'newest') {
     projects.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
   }
@@ -111,7 +103,6 @@ const breadcrumbs = computed(() => [
   { name: 'Проекты', href: '/projects' },
 ])
 
-// Methods
 const toggleTechnology = (tech: string) => {
   const index = selectedTechnologies.value.indexOf(tech)
   if (index === -1) {
@@ -135,7 +126,6 @@ const goToPage = (page: number) => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
-// Watch для URL синхронизации
 watch([selectedSize, selectedSort, searchQuery, selectedTechnologies], () => {
   const query: any = {}
 
@@ -155,7 +145,6 @@ watch([selectedSize, selectedSort, searchQuery, selectedTechnologies], () => {
 onMounted(() => {
   const { $gsap } = useNuxtApp()
 
-  // Анимация появления
   $gsap.fromTo('.page-header', { y: -50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power2.out' },
   )
 
@@ -166,7 +155,6 @@ onMounted(() => {
   )
 })
 
-// SEO
 useHead({
   title: 'Проекты - DevPortfolio',
   meta: [
@@ -177,10 +165,8 @@ useHead({
 
 <template>
   <div class="min-h-screen bg-gray-1">
-    <!-- Page Header -->
     <section class="page-header py-20 bg-gradient-to-b from-gray-2 to-gray-1">
       <div class="container mx-auto px-4">
-        <!-- Breadcrumbs -->
         <nav class="mb-8">
           <ol class="flex items-center space-x-2 text-sm">
             <li v-for="(crumb, index) in breadcrumbs" :key="crumb.name">
@@ -212,11 +198,9 @@ useHead({
       </div>
     </section>
 
-    <!-- Filters -->
     <section class="filters-container py-8 bg-gray-2 border-b border-gray-4">
       <div class="container mx-auto px-4">
         <div class="flex flex-col lg:flex-row gap-6">
-          <!-- Search -->
           <div class="flex-1">
             <div class="relative">
               <Icon name="mdi:magnify" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-8" />
@@ -229,7 +213,6 @@ useHead({
             </div>
           </div>
 
-          <!-- Size Filter -->
           <div>
             <select
               v-model="selectedSize"
@@ -247,7 +230,6 @@ useHead({
             </select>
           </div>
 
-          <!-- Sort -->
           <div>
             <select
               v-model="selectedSort"
@@ -262,7 +244,6 @@ useHead({
             </select>
           </div>
 
-          <!-- Clear Filters -->
           <button
             v-if="selectedSize !== 'all' || selectedTechnologies.length > 0 || searchQuery"
             class="px-6 py-3 text-green border border-green rounded-lg hover:bg-green hover:text-white transition-all duration-300"
@@ -272,7 +253,6 @@ useHead({
           </button>
         </div>
 
-        <!-- Technology Filters -->
         <div class="mt-6">
           <h3 class="text-sm font-semibold text-gray-11 mb-3">
             Технологии:
@@ -291,14 +271,12 @@ useHead({
           </div>
         </div>
 
-        <!-- Results Count -->
         <div class="mt-4 text-sm text-gray-8">
           Найдено проектов: {{ filteredProjects.length }}
         </div>
       </div>
     </section>
 
-    <!-- Projects Grid -->
     <section class="py-12">
       <div class="container mx-auto px-4">
         <div v-if="paginatedProjects.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -308,7 +286,6 @@ useHead({
             class="project-grid-item group cursor-pointer"
           >
             <div class="bg-gray-2 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-4 hover:border-green/50">
-              <!-- Image -->
               <div class="relative overflow-hidden">
                 <img
                   :src="project.images[0]"
@@ -317,7 +294,6 @@ useHead({
                 >
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                <!-- Project Size Badge -->
                 <div class="absolute top-4 left-4">
                   <span
                     :class="project.project_size === 'big' ? 'bg-green' : 'bg-blue-500'"
@@ -327,7 +303,6 @@ useHead({
                   </span>
                 </div>
 
-                <!-- Hover Buttons -->
                 <div class="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <a
                     v-if="project.github"
@@ -356,7 +331,6 @@ useHead({
                 </div>
               </div>
 
-              <!-- Content -->
               <div class="p-6">
                 <h3 class="text-xl font-bold text-gray-12 mb-3 group-hover:text-green transition-colors duration-300">
                   {{ project.title }}
@@ -366,7 +340,6 @@ useHead({
                   {{ project.small_description }}
                 </p>
 
-                <!-- Technologies -->
                 <div class="flex items-center gap-2 mb-4">
                   <Icon
                     v-for="tech in project.technologies.slice(0, 4)"
@@ -379,7 +352,6 @@ useHead({
                   </span>
                 </div>
 
-                <!-- Date -->
                 <div class="text-xs text-gray-7">
                   {{ new Date(project.created_at).toLocaleDateString('ru-RU') }}
                 </div>
@@ -388,7 +360,6 @@ useHead({
           </article>
         </div>
 
-        <!-- Empty State -->
         <div v-else class="text-center py-20">
           <Icon name="mdi:folder-open-outline" class="w-20 h-20 text-gray-6 mx-auto mb-6" />
           <h3 class="text-2xl font-bold text-gray-11 mb-4">
@@ -407,12 +378,10 @@ useHead({
       </div>
     </section>
 
-    <!-- Pagination -->
     <section v-if="totalPages > 1" class="py-12 border-t border-gray-4">
       <div class="container mx-auto px-4">
         <div class="flex justify-center">
           <nav class="flex items-center gap-2">
-            <!-- Previous -->
             <button
               :disabled="currentPage === 1"
               :class="currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-green hover:text-white'"
@@ -422,7 +391,6 @@ useHead({
               <Icon name="mdi:chevron-left" class="w-5 h-5" />
             </button>
 
-            <!-- Page Numbers -->
             <button
               v-for="page in totalPages"
               :key="page"
@@ -433,7 +401,6 @@ useHead({
               {{ page }}
             </button>
 
-            <!-- Next -->
             <button
               :disabled="currentPage === totalPages"
               :class="currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : 'hover:bg-green hover:text-white'"
